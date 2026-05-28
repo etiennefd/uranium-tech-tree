@@ -108,13 +108,13 @@ type CustomAirtableRecord = AirtableRecord<FieldSet>;
       const [innovationRecords, connectionRecords] = (await Promise.all([
         base("Innovations")
           .select({
-            view: "Used for deployment, do not edit directly", // Ensure this view contains ALL necessary fields
+            view: "Main view",
             sort: [{ field: "Date", direction: "desc" }],
           })
           .all(),
         base("Connections")
           .select({
-            view: "Used for deployment, do not edit directly", // Ensure this view contains ALL necessary fields
+            view: "Main view",
           })
           .all(),
       ])) as [CustomAirtableRecord[], CustomAirtableRecord[]];
@@ -132,64 +132,54 @@ type CustomAirtableRecord = AirtableRecord<FieldSet>;
         return dateValue && !isNaN(year) && year !== 9999;
       });
 
+      // Coerce a field that may be returned as an array (multi-select / linked-record)
+      // or as a comma-separated string into a clean string[].
+      const toStringArray = (value: unknown): string[] => {
+        if (Array.isArray(value)) {
+          return value.map((v) => String(v).trim()).filter(Boolean);
+        }
+        return String(value ?? "")
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean);
+      };
+
       const processedNodes = await processBatch(
         validInnovationRecords,
         async (record) => {
           const year = Number(record.get("Date"));
-          const nodeTitle = String(record.get("Name") || "");
-          let imageUrl = "/placeholder-invention.jpg";
+          const imageUrl = String(
+            record.get("Image URL") || "/placeholder-invention.jpg"
+          );
 
-          if (nodeTitle.toLowerCase() === "stone tool") {
-            imageUrl = "/tool-in-situ-being-unearthed-at-excavation_3_edit.jpg";
-          } else {
-            imageUrl = String(record.get("Image URL") || "/placeholder-invention.jpg");
-          }
+          const city = toStringArray(record.get("City")).join(", ");
+          const countryModern = toStringArray(
+            record.get("Country (modern borders)")
+          ).join(", ");
 
           try {
             return {
               id: record.id,
               title: String(record.get("Name") || ""),
-              subtitle: String(record.get("Secondary name") || ""),
-              tier: String(record.get("Tier") || ""),
+              subtitle: "",
+              tier: "",
               image: imageUrl,
               localImage: String(record.get("Local image") || ""),
               year,
-              dateDetails: String(record.get("Date details") || ""),
-              type: String(record.get("Type of innovation") || ""),
-              fields: String(record.get("Field(s)") || "")
-                .split(",")
-                .filter(Boolean)
-                .map((f) => f.trim()),
-              subfields: String(record.get("Subfield(s)") || "")
-                .split(",")
-                .filter(Boolean)
-                .map((f) => f.trim()),
-              inventors: String(record.get("Inventor(s)") || "")
-                .split(",")
-                .filter(Boolean)
-                .map((i) => i.trim()),
-              organizations: cleanCommaList(
-                String(record.get("Organization") || "")
-              )
-                .split(",") // This might need adjustment if cleanCommaList already returns an array
-                .filter(Boolean)
-                .map((org) => org.trim()),
-              city: String(record.get("City") || ""),
-              countryHistorical: cleanCommaList(
-                String(record.get("Country (historical)") || "")
-              ),
-              countryModern: cleanCommaList(
-                String(record.get("Country (modern borders)") || "")
-              ),
-              formattedLocation: formatLocation(
-                String(record.get("City") || ""),
-                String(record.get("Country (historical)") || "")
-              ),
+              dateDetails: "",
+              type: "",
+              fields: toStringArray(record.get("Field(s)")),
+              subfields: [],
+              inventors: toStringArray(record.get("Inventor(s)")),
+              organizations: toStringArray(record.get("Organization")),
+              city,
+              countryHistorical: "",
+              countryModern,
+              formattedLocation: formatLocation(city, countryModern),
               wikipedia: String(record.get("Wikipedia") || ""),
-              details: String(record.get("Details") || ""),
-              imagePosition: String(record.get("Image position") || 'center'),
+              details: "",
+              imagePosition: "center",
               dateAdded: String(record.get("Date added") || ""),
-              // Add any other fields that are part of your detailed node structure
             };
           } catch (error) {
             console.error(`Error processing node ${record.get("Name")}:`, error);
@@ -237,11 +227,10 @@ type CustomAirtableRecord = AirtableRecord<FieldSet>;
               Array.isArray(toValue) && toValue.length > 0
                 ? toValue[0]
                 : String(toValue ?? ""),
-            type: String(record.get("Type") || "default"),
-            details: String(record.get("Details") || ""),
-            detailsSource: String(record.get("Details source") || ""),
+            type: "default",
+            details: "",
+            detailsSource: "",
             dateAdded: String(record.get("Date added") || ""),
-            // Add any other fields for links
           };
         });
       console.timeEnd("ProcessConnections");
