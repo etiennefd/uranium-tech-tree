@@ -1,5 +1,4 @@
 import React, { useState, useEffect, memo } from 'react';
-import Link from 'next/link';
 import { cacheManager } from '@/utils/cache';
 
 const IntroBox = memo(() => {
@@ -73,12 +72,6 @@ const IntroBox = memo(() => {
       </p>
 
       <div className="text-sm space-x-4">
-        <Link href="/about" style={linkStyle}>
-          Read more
-        </Link>
-        <Link href="/about#contributing" style={linkStyle}>
-          Contribute
-        </Link>
         <a
           href="https://discord.gg/e96JwQjUmX"
           target="_blank"
@@ -87,9 +80,6 @@ const IntroBox = memo(() => {
         >
           Join Discord
         </a>
-        <Link href="/changelog" style={linkStyle}>
-          Changelog
-        </Link>
       </div>
     </div>
   );

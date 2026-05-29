@@ -38,7 +38,6 @@ fi
 # Track errors
 IMAGE_ERRORS=0
 DATA_ERRORS=0
-CHANGELOG_ERRORS=0
 
 # Update images first
 echo "Updating images..."
@@ -50,12 +49,6 @@ fi
 echo "Updating tech tree data..."
 if ! NODE_OPTIONS="--no-deprecation" npx tsx src/scripts/fetch-and-save-inventions.ts; then
     DATA_ERRORS=1
-fi
-
-# Generate changelog
-echo "Generating changelog..."
-if ! NODE_OPTIONS="--no-deprecation" npx tsx src/scripts/generate-changelog.ts; then
-    CHANGELOG_ERRORS=1
 fi
 
 # Trigger a rebuild if in production
@@ -72,11 +65,10 @@ fi
 echo "Done!"
 
 # Report errors if any occurred
-if [ $IMAGE_ERRORS -eq 1 ] || [ $DATA_ERRORS -eq 1 ] || [ $CHANGELOG_ERRORS -eq 1 ]; then
+if [ $IMAGE_ERRORS -eq 1 ] || [ $DATA_ERRORS -eq 1 ]; then
     echo ""
     echo "⚠️  ERRORS DETECTED:"
     [ $IMAGE_ERRORS -eq 1 ] && echo "  - Image processing errors (check output above for details)"
     [ $DATA_ERRORS -eq 1 ] && echo "  - Data update errors"
-    [ $CHANGELOG_ERRORS -eq 1 ] && echo "  - Changelog generation errors"
     echo ""
 fi 
