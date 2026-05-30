@@ -178,7 +178,7 @@ type CustomAirtableRecord = AirtableRecord<FieldSet>;
               formattedLocation: formatLocation(city, countryModern),
               wikipedia: String(record.get("Wikipedia") || ""),
               details: "",
-              imagePosition: "center",
+              imagePosition: String(record.get("Image position") || "center"),
               dateAdded: String(record.get("Date added") || ""),
             };
           } catch (error) {
