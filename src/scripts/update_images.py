@@ -350,9 +350,9 @@ def main():
         if current_credits:
             print(f"  Current credits: {current_credits}")
 
-        # Skip if no image URL or if it's not from a supported source
-        if not image_url or ('wikimedia.org' not in image_url and 'patentimages.storage.googleapis.com' not in image_url):
-            print("  Skipping: No valid image URL found (must be from Wikimedia or Google Patents).")
+        # Skip if no image URL
+        if not image_url:
+            print("  Skipping: No image URL set.")
             skipped_count += 1
             continue
 
@@ -362,16 +362,17 @@ def main():
             skipped_count += 1
             continue
 
+        # Credit lookup is only available for Wikimedia and Google Patents.
+        # For other sources, download still proceeds but credits aren't auto-filled.
         filename = extract_filename_from_url(image_url)
-        if not filename:
-            print("  Skipping: Could not extract filename from URL.")
-            skipped_count += 1
-            continue
-
-        print(f"  Extracted filename: {filename}")
-        credits_data = get_image_credits(filename, image_url)
-        if not credits_data:
-            credits_errors.append({"title": title, "record_id": record_id, "filename": filename})
+        credits_data = None
+        if filename:
+            print(f"  Extracted filename: {filename}")
+            credits_data = get_image_credits(filename, image_url)
+            if not credits_data:
+                credits_errors.append({"title": title, "record_id": record_id, "filename": filename})
+        else:
+            print("  No filename extracted (non-Wikimedia/Patents source); credits won't be auto-populated.")
 
         # Only download and optimize image if not in credits-only mode
         local_image_path = None
