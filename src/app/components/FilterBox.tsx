@@ -192,7 +192,7 @@ export const FilterBox: React.FC<FilterBoxProps> = ({
         >
           <Filter className="h-4 w-4" />
           {activeFilterCount > 0 && (
-            <span className="absolute -top-1 -right-1 bg-[#91B4C5] text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+            <span className="absolute -top-1 -right-1 bg-[#C5C95C] text-[#331a4a] text-xs rounded-full w-4 h-4 flex items-center justify-center">
               {activeFilterCount}
             </span>
           )}
@@ -230,7 +230,7 @@ export const FilterBox: React.FC<FilterBoxProps> = ({
           return Array.from(set as Set<string>).map((value: string) => (
             <div
               key={`${type}-${value}`}
-              className="inline-flex items-center bg-yellow-100 border border-black rounded-none px-2 py-1 m-1 text-sm"
+              className="inline-flex items-center bg-[#C5C95C]/30 border border-black rounded-none px-2 py-1 m-1 text-sm"
             >
               <span className="mr-1">{value}</span>
               <button
@@ -251,8 +251,8 @@ export const FilterBox: React.FC<FilterBoxProps> = ({
                 key={`${suggestion.type}-${suggestion.value}`}
                 className={`p-2 cursor-pointer ${
                   index === selectedIndex
-                    ? "bg-yellow-100"
-                    : "hover:bg-yellow-50"
+                    ? "bg-[#9FFF00]/20"
+                    : "hover:bg-[#C5C95C]/15"
                 }`}
                 onClick={() => addFilter(suggestion.type, suggestion.value)}
               >

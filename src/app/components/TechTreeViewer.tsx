@@ -1387,7 +1387,7 @@ export function TechTreeViewer() {
     const style = document.createElement("style");
     style.textContent = `
       body {
-        background-color: rgb(254 252 232); /* This is the Tailwind yellow-50 color */
+        background-color: #331a4a;
       }
       .fast-smooth-scroll {
         scroll-behavior: smooth;
@@ -3131,7 +3131,7 @@ useEffect(() => {
 
   // 5. Defer non-critical UI elements
   return (
-    <div className="h-screen bg-yellow-50">
+    <div className="h-screen bg-[#331a4a]">
       {/* Defer loading of controls until after main content */}
       {!isLoading && (
         <div
@@ -3175,14 +3175,14 @@ useEffect(() => {
 
       <div
         ref={horizontalScrollContainerRef}
-        className="overflow-x-auto overflow-y-auto h-[100dvh] bg-yellow-50"
+        className="overflow-x-auto overflow-y-auto h-[100dvh] bg-[#331a4a]"
         style={{ 
           overscrollBehavior: "none",
           touchAction: isTouchDevice ? "pan-x pan-y" : "pan-x pan-y pinch-zoom",
           WebkitOverflowScrolling: "touch",
           WebkitTapHighlightColor: "transparent",
           scrollbarWidth: "thin",   // Show thin scrollbar in Firefox
-          scrollbarColor: "#91B4C5 #fefce8", // Thumb and track colors
+          scrollbarColor: "#C5C95C #331a4a", // Thumb and track colors
           position: 'relative',
           zIndex: 20 // Higher than minimap's z-index of 10
         }}
@@ -3207,7 +3207,7 @@ useEffect(() => {
           }}
         >
           <div
-            className="h-12 bg-yellow-50 border-b timeline flex-shrink-0"
+            className="h-12 bg-[#331a4a] border-b timeline flex-shrink-0"
             data-no-tree-zoom="true"
             style={{
               width: `calc(${containerWidth}px * var(--tree-zoom))`,
@@ -3229,7 +3229,7 @@ useEffect(() => {
                     return (
                       <div
                         key={year}
-                        className="absolute text-sm text-gray-600 font-mono whitespace-nowrap"
+                        className="absolute text-sm text-[#C5C95C] font-mono whitespace-nowrap"
                         style={{
                           left: `calc(${getXPosition(year)}px * var(--tree-zoom))`,
                           transform: "translateX(-50%)",
@@ -3875,7 +3875,7 @@ useEffect(() => {
         {/* Minimap - Conditionally render based on data? Or leave as is? */}
         {data.nodes.length > 0 && (
           <div 
-            className="fixed left-0 right-0 z-10 h-16 bg-yellow-50"
+            className="fixed left-0 right-0 z-10 h-16 bg-[#331a4a]"
             style={{
               bottom: '0px',
               position: 'fixed',
@@ -3913,10 +3913,10 @@ useEffect(() => {
       {/* Desktop zoom controls */}
       {!isTouchDevice && !isLoading && (
         <div className="fixed bottom-20 right-16 z-30 -translate-y-1 font-mono">
-          <div className="flex items-center overflow-hidden border border-[#91B4C5] bg-white/80 backdrop-blur">
+          <div className="flex items-center overflow-hidden border border-[#C5C95C] bg-white/80 backdrop-blur">
             <button
               type="button"
-              className="px-2 py-1 text-xs text-[#91B4C5] transition-colors hover:bg-[#91B4C5]/10 disabled:cursor-not-allowed disabled:opacity-40"
+              className="px-2 py-1 text-xs text-[#C5C95C] transition-colors hover:bg-[#C5C95C]/10 disabled:cursor-not-allowed disabled:opacity-40"
               disabled={treeZoomLevel <= MIN_TREE_ZOOM}
               onClick={() => stepZoom(-1)}
             >
@@ -3924,7 +3924,7 @@ useEffect(() => {
             </button>
             <button
               type="button"
-              className="min-w-[3.75rem] border-l border-r border-[#91B4C5] px-2 py-1 text-[11px] text-[#91B4C5] transition-colors hover:bg-[#91B4C5]/10"
+              className="min-w-[3.75rem] border-l border-r border-[#C5C95C] px-2 py-1 text-[11px] text-[#C5C95C] transition-colors hover:bg-[#C5C95C]/10"
               onClick={() => updateZoom(1, getViewportAnchor())}
               title="Reset zoom"
             >
@@ -3932,7 +3932,7 @@ useEffect(() => {
             </button>
             <button
               type="button"
-              className="px-2 py-1 text-xs text-[#91B4C5] transition-colors hover:bg-[#91B4C5]/10 disabled:cursor-not-allowed disabled:opacity-40"
+              className="px-2 py-1 text-xs text-[#C5C95C] transition-colors hover:bg-[#C5C95C]/10 disabled:cursor-not-allowed disabled:opacity-40"
               disabled={treeZoomLevel >= MAX_TREE_ZOOM}
               onClick={() => stepZoom(1)}
             >
@@ -3945,7 +3945,7 @@ useEffect(() => {
       <div ref={settingsControlsRef} className="fixed bottom-20 right-4 z-30">
         <button
           type="button"
-          className="settings-button p-2 text-[#91B4C5] hover:text-[#6B98AE] transition-colors"
+          className="settings-button p-2 text-[#C5C95C] hover:text-[#9FA346] transition-colors"
           onClick={() => setShowSettingsMenu((prev) => !prev)}
           style={{ overscrollBehavior: 'contain' }}
         >
@@ -3968,21 +3968,21 @@ useEffect(() => {
         {showSettingsMenu && (
           <div 
             ref={settingsMenuRef}
-            className="absolute bottom-full right-0 mb-2 bg-white/80 backdrop-blur border border-[#91B4C5] p-4 min-w-[200px] font-mono"
+            className="absolute bottom-full right-0 mb-2 bg-white/80 backdrop-blur border border-[#C5C95C] p-4 min-w-[200px] font-mono"
           >
             <div className="space-y-6">
               {/* Connections Mode */}
               <div>
-                <div className="text-xs uppercase tracking-wider text-[#91B4C5] mb-3">Display options</div>
+                <div className="text-xs uppercase tracking-wider text-[#C5C95C] mb-3">Display options</div>
                 <div className="space-y-4">
                   {!isTouchDevice && (
                     <div>
                       <div className="flex items-center justify-between gap-4">
                         <span className="text-sm">Zoom</span>
-                        <div className="flex items-center border border-[#91B4C5]">
+                        <div className="flex items-center border border-[#C5C95C]">
                           <button
                             type="button"
-                            className="px-2 py-1 text-xs text-[#91B4C5] transition-colors hover:bg-[#91B4C5]/10 disabled:cursor-not-allowed disabled:opacity-40"
+                            className="px-2 py-1 text-xs text-[#C5C95C] transition-colors hover:bg-[#C5C95C]/10 disabled:cursor-not-allowed disabled:opacity-40"
                             disabled={treeZoomLevel <= MIN_TREE_ZOOM}
                             onClick={() => stepZoom(-1)}
                           >
@@ -3990,14 +3990,14 @@ useEffect(() => {
                           </button>
                           <button
                             type="button"
-                            className="border-l border-r border-[#91B4C5] px-3 py-1 text-xs text-[#91B4C5] transition-colors hover:bg-[#91B4C5]/10"
+                            className="border-l border-r border-[#C5C95C] px-3 py-1 text-xs text-[#C5C95C] transition-colors hover:bg-[#C5C95C]/10"
                             onClick={() => updateZoom(1, getViewportAnchor())}
                           >
                             {zoomPercent}%
                           </button>
                           <button
                             type="button"
-                            className="px-2 py-1 text-xs text-[#91B4C5] transition-colors hover:bg-[#91B4C5]/10 disabled:cursor-not-allowed disabled:opacity-40"
+                            className="px-2 py-1 text-xs text-[#C5C95C] transition-colors hover:bg-[#C5C95C]/10 disabled:cursor-not-allowed disabled:opacity-40"
                             disabled={treeZoomLevel >= MAX_TREE_ZOOM}
                             onClick={() => stepZoom(1)}
                           >
@@ -4005,7 +4005,7 @@ useEffect(() => {
                           </button>
                         </div>
                       </div>
-                      <div className="mt-2 text-[10px] uppercase tracking-wide text-[#91B4C5]/80">
+                      <div className="mt-2 text-[10px] uppercase tracking-wide text-[#C5C95C]/80">
                         Cmd/Ctrl + wheel or +/- to zoom
                       </div>
                     </div>
@@ -4013,22 +4013,22 @@ useEffect(() => {
 
                   <div className="flex items-center justify-between">
                   <span className="text-sm">Connections</span>
-                  <div className="flex border border-[#91B4C5] ml-4">
+                  <div className="flex border border-[#C5C95C] ml-4">
                     <button
                       className={`px-2 py-1 text-xs transition-colors ${
                         connectionMode === 'all' 
-                          ? 'bg-[#91B4C5] text-white' 
-                          : 'bg-transparent text-[#91B4C5] hover:bg-[#91B4C5]/10'
+                          ? 'bg-[#C5C95C] text-white' 
+                          : 'bg-transparent text-[#C5C95C] hover:bg-[#C5C95C]/10'
                       }`}
                       onClick={() => setConnectionMode('all')}
                     >
                       All
                     </button>
                     <button
-                      className={`px-2 py-1 text-xs transition-colors border-l border-r border-[#91B4C5] ${
+                      className={`px-2 py-1 text-xs transition-colors border-l border-r border-[#C5C95C] ${
                         connectionMode === 'optimized' 
-                          ? 'bg-[#91B4C5] text-white' 
-                          : 'bg-transparent text-[#91B4C5] hover:bg-[#91B4C5]/10'
+                          ? 'bg-[#C5C95C] text-white' 
+                          : 'bg-transparent text-[#C5C95C] hover:bg-[#C5C95C]/10'
                       }`}
                       onClick={() => setConnectionMode('optimized')}
                     >
@@ -4037,8 +4037,8 @@ useEffect(() => {
                     <button
                       className={`px-2 py-1 text-xs transition-colors ${
                         connectionMode === 'minimal' 
-                          ? 'bg-[#91B4C5] text-white' 
-                          : 'bg-transparent text-[#91B4C5] hover:bg-[#91B4C5]/10'
+                          ? 'bg-[#C5C95C] text-white' 
+                          : 'bg-transparent text-[#C5C95C] hover:bg-[#C5C95C]/10'
                       }`}
                       onClick={() => setConnectionMode('minimal')}
                     >
@@ -4054,10 +4054,10 @@ useEffect(() => {
                 <div className="flex items-center justify-between">
                   <span className="text-sm">Images</span>
                   <div className="flex items-center space-x-3 ml-4">
-                    <span className="text-xs text-[#91B4C5]">Hide</span>
+                    <span className="text-xs text-[#C5C95C]">Hide</span>
                     <button
                       className={`w-8 h-4 relative transition-colors ${
-                        showImages ? 'bg-[#91B4C5]' : 'bg-[#91B4C5]/20'
+                        showImages ? 'bg-[#C5C95C]' : 'bg-[#C5C95C]/20'
                       }`}
                       onClick={() => setShowImages(!showImages)}
                     >
@@ -4065,7 +4065,7 @@ useEffect(() => {
                         showImages ? 'left-4' : 'left-0.5'
                       } bg-white`} />
                     </button>
-                    <span className="text-xs text-[#91B4C5]">Show</span>
+                    <span className="text-xs text-[#C5C95C]">Show</span>
                   </div>
                 </div>
               </div>
@@ -4074,7 +4074,7 @@ useEffect(() => {
               <div>
                 <div className="flex items-center justify-between">
                   <button
-                    className="text-xs text-[#91B4C5] hover:text-[#6B98AE] transition-colors"
+                    className="text-xs text-[#C5C95C] hover:text-[#9FA346] transition-colors"
                     onClick={() => {
                       resetView();
                       setShowSettingsMenu(false);

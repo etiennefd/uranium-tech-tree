@@ -54,7 +54,8 @@ const TechTreeMinimap = ({
   const MINIMAP_CONTENT_HEIGHT = 48; // Height of the minimap content area
   const LABEL_HEIGHT = 10; // Space for labels
   const SMALL_SCREEN_MINIMAP_VERTICAL_SCALE = 2; // How much more vertically compressed the minimap is on small screens
-  const engineeringBlue = "#91B4C5";
+  const daylightUranium = "#C5C95C";
+  const uvGlow = "#9FFF00";
   const minimapRef = useRef(null);
   const isDragging = useRef(false);
   const [scale, setScale] = useState(1);
@@ -168,7 +169,7 @@ const TechTreeMinimap = ({
 
   return (
     <div
-      className="sticky bottom-0 left-0 right-0 overflow-hidden bg-yellow-50 minimap"
+      className="sticky bottom-0 left-0 right-0 overflow-hidden bg-[#331a4a] minimap"
       style={{ 
         height: MINIMAP_HEIGHT, 
         zIndex: 1000,
@@ -190,7 +191,7 @@ const TechTreeMinimap = ({
               transform: "translateX(-50%)",
               fontSize: "7px",
               lineHeight: "1",
-              color: engineeringBlue,
+              color: daylightUranium,
               fontFamily:
                 "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
               whiteSpace: "nowrap",
@@ -232,7 +233,11 @@ const TechTreeMinimap = ({
               style={{
                 width: isSelected || isFiltered || isAdjacent || isAncestor || isDescendant ? "4px" : "2px",
                 height: isSelected || isFiltered || isAdjacent || isAncestor || isDescendant ? "4px" : "2px",
-                backgroundColor: engineeringBlue,
+                backgroundColor:
+                  isSelected || isAdjacent || isAncestor || isDescendant
+                    ? uvGlow
+                    : daylightUranium,
+                boxShadow: isSelected ? "0 0 4px 1px rgba(159, 255, 0, 0.8)" : undefined,
                 opacity: hasActiveFilters
                   ? isFiltered
                     ? 0.9
@@ -265,9 +270,9 @@ const TechTreeMinimap = ({
             height: minimapViewport.height,
             left: minimapViewport.x,
             top: minimapViewport.y,
-            border: `1px solid ${engineeringBlue}`,
-            backgroundColor: `${engineeringBlue}20`,
-            boxShadow: `0 0 0 1px ${engineeringBlue}40`,
+            border: `1px solid ${daylightUranium}`,
+            backgroundColor: `${daylightUranium}20`,
+            boxShadow: `0 0 0 1px ${daylightUranium}40`,
           }}
           onMouseDown={handleMouseDown}
         />

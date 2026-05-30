@@ -190,8 +190,8 @@ export function SearchBox({
                 key={`${result.type}-${result.text}-${index}`}
                 className={`p-2 cursor-pointer ${
                   index === selectedIndex
-                    ? "bg-yellow-100"
-                    : "hover:bg-yellow-50"
+                    ? "bg-[#9FFF00]/20"
+                    : "hover:bg-[#C5C95C]/15"
                 }`}
                 onClick={() => {
                   onSelectResult(result);

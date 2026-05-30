@@ -261,9 +261,14 @@ const BrutalistNode: React.FC<BrutalistNodeProps> = ({
         className={`
         border border-black
         bg-white
-        ${isSelected ? "ring-2 ring-black" : ""}
+        ${isSelected ? "ring-2 ring-[#9FFF00]" : ""}
         relative
       `}
+        style={
+          isSelected
+            ? { boxShadow: "0 0 12px 2px rgba(159, 255, 0, 0.65)" }
+            : undefined
+        }
       >
         {/* Add X button for selected state */}
         {isSelected && (

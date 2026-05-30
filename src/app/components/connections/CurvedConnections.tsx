@@ -201,12 +201,16 @@ const CurvedConnections: React.FC<CurvedConnectionsProps> = ({
   };
 
   const getLineStyle = (type: ConnectionType, isActive: boolean) => {
-    const engineeringBlue = "#91B4C5";
+    const daylightUranium = "#C5C95C";
+    const uvGlow = "#9FFF00";
 
     const baseStyle = {
-      stroke: engineeringBlue,
-      strokeWidth: isActive ? 2 : 1.5,
+      stroke: isActive ? uvGlow : daylightUranium,
+      strokeWidth: isActive ? 2.25 : 1.5,
       strokeOpacity: isActive ? opacity : 0.7 * opacity,
+      filter: isActive
+        ? "drop-shadow(0 0 4px rgba(159, 255, 0, 0.8))"
+        : undefined,
     };
 
     switch (type) {

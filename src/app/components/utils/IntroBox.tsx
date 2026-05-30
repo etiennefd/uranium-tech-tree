@@ -3,7 +3,7 @@ import { cacheManager } from '@/utils/cache';
 
 const IntroBox = memo(() => {
   const [counts, setCounts] = useState({ nodes: 0, links: 0 });
-  const darkerBlue = "#6B98AE";
+  const darkerBlue = "#C5C95C";
   const linkStyle = { color: darkerBlue, textDecoration: "underline" };
   const numberStyle = { 
     color: darkerBlue, 

@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
 body {
+  background-color: #331a4a;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -13,16 +15,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #fefce8; /* yellow-50 */
+  background: #331a4a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #91B4C5;
+  background: #C5C95C;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #6B98AE;
+  background: #9FA346;
 }
 
 @layer base {
