@@ -29,7 +29,6 @@ import { cacheManager, CACHE_VERSION } from "@/utils/cache";
 import { SpatialIndex } from "@/utils/SpatialIndex";
 // Import useSearchParams
 import { useSearchParams } from 'next/navigation';
-import { DebugOverlay } from "@/app/components/utils/DebugOverlay";
 import IntroBox from "@/app/components/utils/IntroBox";
 import { 
   TechTreeLink, 
@@ -326,7 +325,6 @@ export function TechTreeViewer() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [isError] = useState(false);
-  const [showDebugOverlay, setShowDebugOverlay] = useState(true);
   const [hoveredNode, setHoveredNode] = useState<TechNode | null>(null);
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
   const [hoveredLinkIndex, setHoveredLinkIndex] = useState<number | null>(null);
@@ -439,8 +437,6 @@ export function TechTreeViewer() {
   const searchBoxContainerRef = useRef<HTMLDivElement>(null);
   const filterBoxContainerRef = useRef<HTMLDivElement>(null);
 
-  // Add ref for the jump button
-  const jumpButtonRef = useRef<HTMLButtonElement>(null);
   const prefetchedNodeDetails = useRef<Map<string, Partial<TechNode>>>(new Map());
 
   // Add state for visible viewport
@@ -1050,41 +1046,6 @@ export function TechTreeViewer() {
     },
     [clearSelectedNodeUrl, data.nodes, selectedNodeId, getXPosition, containerDimensions.height, isMobile, router]
   );
-
-  const handleJumpToNearest = useCallback(() => {
-    if (!data.nodes.length || !horizontalScrollContainerRef.current || !containerDimensions.width || !containerDimensions.height) return;
-
-    const zoom = zoomLevelRef.current;
-    const viewportCenterX = scrollPosition.left / zoom + containerDimensions.width / (2 * zoom);
-    const viewportCenterY = scrollPosition.top / zoom + containerDimensions.height / (2 * zoom);
-
-    let nearestNode: TechNode | null = null;
-    let minDistanceSq = Infinity;
-
-    data.nodes.forEach((node: TechNode) => {
-      if (node.y === undefined) return; // y is essential for positioning
-
-      const nodeX = getXPosition(node.year); // x is derived via getXPosition
-      const distanceSq = Math.pow(nodeX - viewportCenterX, 2) + Math.pow(node.y - viewportCenterY, 2);
-
-      if (distanceSq < minDistanceSq) {
-        minDistanceSq = distanceSq;
-        nearestNode = node;
-      }
-    });
-
-    if (nearestNode !== null && (nearestNode as TechNode).y !== undefined) {
-      const nn = nearestNode as TechNode; // Assign to a new const with the asserted type
-      const targetScrollLeft = getXPosition(nn.year) * zoom - containerDimensions.width / 2;
-      const targetScrollTop = nn.y! * zoom - containerDimensions.height / 2;
-
-      horizontalScrollContainerRef.current.scrollTo({
-        left: Math.max(0, targetScrollLeft),
-        top: Math.max(0, targetScrollTop),
-        behavior: 'smooth',
-      });
-    }
-  }, [data.nodes, scrollPosition, containerDimensions, horizontalScrollContainerRef, getXPosition]);
 
   // Helper function to check if a node is adjacent to selected node
   const isAdjacentToSelected = useCallback(
@@ -3132,28 +3093,6 @@ useEffect(() => {
     };
   }, [isClient, isLoading]); // Updated dependency array
 
-  // Effect to disable scrolling on the jump button
-  useEffect(() => {
-    const jumpButtonElement = jumpButtonRef.current;
-
-    const preventScroll = (e: WheelEvent | TouchEvent) => {
-      e.preventDefault();
-    };
-
-    if (jumpButtonElement) {
-      jumpButtonElement.addEventListener('wheel', preventScroll, { passive: false });
-      jumpButtonElement.addEventListener('touchmove', preventScroll, { passive: false });
-    }
-
-    // Cleanup function
-    return () => {
-      if (jumpButtonElement) {
-        jumpButtonElement.removeEventListener('wheel', preventScroll);
-        jumpButtonElement.removeEventListener('touchmove', preventScroll);
-      }
-    };
-  }, [isLoading, visibleNodes.length, data.nodes.length]); // Rerun when button visibility might change
-
   // Function to handle node hover for prefetching
   const handleNodeHoverForPrefetch = useCallback((title: string) => {
     // Find the node by title
@@ -3898,96 +3837,8 @@ useEffect(() => {
                               );
                             }
 
-                            const hasAncestors = data.links.some(
-                              link => link.target === nodeId &&
-                              !["Independently invented", "Concurrent development"].includes(link.type)
-                            );
-                            const hasDescendants = data.links.some(
-                              link => link.source === nodeId &&
-                              !["Independently invented", "Concurrent development"].includes(link.type)
-                            );
-
                             return (
                               <div className="text-xs mt-2">
-                                {(hasAncestors || hasDescendants) && (
-                                  <div className="mb-1">
-                                    {hasAncestors && hasDescendants ? (
-                                      <>
-                                        Highlight all{" "}
-                                        <button
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                            const ancestors = getAllAncestors(nodeId);
-                                            ancestors.delete(nodeId);
-                                            if (!selectedNodeId) {
-                                              setSelectedNodeId(nodeId);
-                                            }
-                                            setHighlightedAncestors(ancestors);
-                                            setHighlightedDescendants(new Set());
-                                          }}
-                                          className="text-blue-600 hover:underline cursor-pointer"
-                                        >
-                                          ancestors
-                                        </button>
-                                        {" / "}
-                                        <button
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                            const descendants = getAllDescendants(nodeId);
-                                            descendants.delete(nodeId);
-                                            if (!selectedNodeId) {
-                                              setSelectedNodeId(nodeId);
-                                            }
-                                            setHighlightedDescendants(descendants);
-                                            setHighlightedAncestors(new Set());
-                                          }}
-                                          className="text-blue-600 hover:underline cursor-pointer"
-                                        >
-                                          descendants
-                                        </button>
-                                      </>
-                                    ) : hasAncestors ? (
-                                      <>
-                                        Highlight all{" "}
-                                        <button
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                            const ancestors = getAllAncestors(nodeId);
-                                            ancestors.delete(nodeId);
-                                            if (!selectedNodeId) {
-                                              setSelectedNodeId(nodeId);
-                                            }
-                                            setHighlightedAncestors(ancestors);
-                                            setHighlightedDescendants(new Set());
-                                          }}
-                                          className="text-blue-600 hover:underline cursor-pointer"
-                                        >
-                                          ancestors
-                                        </button>
-                                      </>
-                                    ) : (
-                                      <>
-                                        Highlight all{" "}
-                                        <button
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                            const descendants = getAllDescendants(nodeId);
-                                            descendants.delete(nodeId);
-                                            if (!selectedNodeId) {
-                                              setSelectedNodeId(nodeId);
-                                            }
-                                            setHighlightedDescendants(descendants);
-                                            setHighlightedAncestors(new Set());
-                                          }}
-                                          className="text-blue-600 hover:underline cursor-pointer"
-                                        >
-                                          descendants
-                                        </button>
-                                      </>
-                                    )}
-                                  </div>
-                                )}
-
                                 {node.wikipedia && (
                                   <div>
                                     View on{" "}
@@ -4053,38 +3904,6 @@ useEffect(() => {
           </div>
         )}
       </div>
-      {/* Only render debug overlay in development mode */}
-      {process.env.NODE_ENV === 'development' && showDebugOverlay && (
-        <DebugOverlay
-          viewport={visibleViewport}
-          scrollPosition={scrollPosition}
-          totalNodes={data.nodes.length}
-          visibleNodes={visibleElements.visibleNodes.length}
-          strictlyVisibleNodes={strictlyVisibleNodes.length}
-          totalConnections={data.links.length}
-          visibleConnections={visibleElements.visibleConnections.length}
-          nodeVisibleConnections={visibleElements.nodeVisibleConnections}
-          stickyVisibleConnections={visibleElements.stickyVisibleConnections}
-          invisibleViewportConnections={visibleElements.invisibleViewportConnections}
-          onClose={() => setShowDebugOverlay(false)}
-        />
-      )}
-      {/* Jump to Nearest Tech Button - Update the condition */}
-      {!isLoading && strictlyVisibleNodes.length === 0 && data.nodes.length > 0 && (
-        <button
-          ref={jumpButtonRef}
-          onClick={handleJumpToNearest}
-          className="fixed bottom-20 left-1/2 transform -translate-x-1/2 z-20 px-4 py-2 bg-transparent rounded text-sm transition-colors duration-150"
-          style={{
-             color: '#91B4C5',
-             borderColor: 'transparent',
-             borderWidth: '0px',
-             backdropFilter: 'blur(2px)', 
-          }}
-        >
-          Jump to nearest tech
-        </button>
-      )}
       {/* Desktop zoom controls */}
       {!isTouchDevice && !isLoading && (
         <div className="fixed bottom-20 right-16 z-30 -translate-y-1 font-mono">

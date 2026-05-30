@@ -47,12 +47,12 @@ const IntroBox = memo(() => {
   }, []);
 
   return (
-    <div className="absolute left-4 top-12 p-6 w-[375px] z-50">
-      <h1 className="text-2xl font-bold mb-2" style={{ color: darkerBlue }}>
-        HISTORICAL TECH TREE
+    <div className="absolute left-4 top-8 p-6 w-[400px] z-50">
+      <h1 className="text-3xl font-bold mb-3 tracking-tight" style={{ color: darkerBlue }}>
+        URANIUM TECH TREE
       </h1>
-      <p className="text-sm mb-4" style={{ color: darkerBlue }}>
-        A project by{" "}
+      <p className="text-sm mb-3" style={{ color: darkerBlue }}>
+        A companion piece to a blog post by{" "}
         <a
           href="https://www.hopefulmons.com/"
           target="_blank"
@@ -61,26 +61,16 @@ const IntroBox = memo(() => {
         >
           Étienne Fortier-Dubois
         </a>
+        .
       </p>
 
-      <p className="text-sm mb-4" style={{ color: darkerBlue }}>
-        The tech tree is an interactive visualization of technological history from 3
-        million years ago to today. A work in progress, it currently contains{" "}
-        <span style={numberStyle}>{counts.nodes}</span> technologies and{" "}
-        <span style={numberStyle}>{counts.links}</span> connections
-        between them.
+      <p className="text-sm" style={{ color: darkerBlue }}>
+        Two and a half centuries of discoveries and inventions surrounding a single
+        element, currently spanning{" "}
+        <span style={numberStyle}>{counts.nodes}</span> technologies linked by{" "}
+        <span style={numberStyle}>{counts.links}</span> connections. Hover or click
+        any node to learn more.
       </p>
-
-      <div className="text-sm space-x-4">
-        <a
-          href="https://discord.gg/e96JwQjUmX"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={linkStyle}
-        >
-          Join Discord
-        </a>
-      </div>
     </div>
   );
 });

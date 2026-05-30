@@ -15,8 +15,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Historical Tech Tree",
-  description: "Interactive visualization of technological history",
+  title: "Uranium Tech Tree",
+  description: "An interactive tech tree of uranium discoveries and inventions",
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -28,24 +28,23 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   openGraph: {
-    title: "Historical Tech Tree",
-    description: "Interactive visualization of technological history",
+    title: "Uranium Tech Tree",
+    description: "An interactive tech tree of uranium discoveries and inventions",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Historical Tech Tree Visualization",
+        alt: "Uranium Tech Tree Visualization",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Historical Tech Tree",
-    description: "Interactive visualization of technological history",
+    title: "Uranium Tech Tree",
+    description: "An interactive tech tree of uranium discoveries and inventions",
     images: ["/og-image.png"],
   },
-  metadataBase: new URL("https://historicaltechtree.com"),
 };
 
 export default function RootLayout({
