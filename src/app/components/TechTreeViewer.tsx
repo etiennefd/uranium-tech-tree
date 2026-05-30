@@ -62,8 +62,7 @@ const YEAR_NEOLITHIC = -10000;
 const YEAR_UPPER_PALEOLITHIC = -50000;
 const YEAR_MIDDLE_PALEOLITHIC = -100000;
 
-// Define fixed timeline boundaries for early rendering
-const TIMELINE_MIN_YEAR = -3300000;
+// Default used only before data loads
 const DEFAULT_TIMELINE_MAX_YEAR = 2026;
 
 // Define a screen width threshold for small screens
@@ -1115,6 +1114,13 @@ export function TechTreeViewer() {
     () =>
       data.nodes.length
         ? Math.max(...data.nodes.map((n) => n.year))
+        : DEFAULT_TIMELINE_MAX_YEAR,
+    [data.nodes]
+  );
+  const timelineMinYear = useMemo(
+    () =>
+      data.nodes.length
+        ? Math.min(...data.nodes.map((n) => n.year))
         : DEFAULT_TIMELINE_MAX_YEAR,
     [data.nodes]
   );
@@ -3215,7 +3221,7 @@ useEffect(() => {
             }}
           >
             {(() => {
-              const timelineYears = getTimelineYears(TIMELINE_MIN_YEAR, timelineMaxYear);
+              const timelineYears = getTimelineYears(timelineMinYear, timelineMaxYear);
 
               return (
                 <div className="relative" style={{ width: "100%", height: "100%" }}>
@@ -3225,7 +3231,7 @@ useEffect(() => {
                         key={year}
                         className="absolute text-sm text-gray-600 font-mono whitespace-nowrap"
                         style={{
-                          left: `calc(${calculateXPosition(year, TIMELINE_MIN_YEAR, PADDING, YEAR_WIDTH)}px * var(--tree-zoom))`,
+                          left: `calc(${getXPosition(year)}px * var(--tree-zoom))`,
                           transform: "translateX(-50%)",
                           top: isMobile ? "16px" : "16px",
                           fontSize:
