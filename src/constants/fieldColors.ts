@@ -4,29 +4,29 @@
 
 export const FIELD_COLORS: Record<string, string> = {
   // Materials / elements
-  Uranium: "#E6C84A",   // yellowcake yellow
-  Radium: "#5A8FD6",    // Cherenkov blue
+  Uranium: "#D9A92E",   // deep yellowcake
+  Radium: "#3D7BE0",    // saturated Cherenkov blue
 
   // Greens — four shades, dim mineral → vivid radioactive
-  "Green rocks": "#4A7438",
-  "Green poison": "#6A8F2A",
-  "Green glowing uranium": "#6FCF2D",
-  Glow: "#5BCFA1",
+  "Green rocks": "#3F7A1F",
+  "Green poison": "#6FA32E",
+  "Green glowing uranium": "#4FCF1A",
+  Glow: "#1FBA8A",
 
-  // Cultural artifacts — pink family
-  "Visual arts": "#E94E8A",
-  "Music & dance": "#FF8AB8",
-  "Comics & literature": "#C2185B",
-  "Film & TV": "#E0556B",
-  Games: "#FFA1C9",
+  // Cultural artifacts — saturated pink family
+  "Visual arts": "#E0357A",
+  "Comics & literature": "#BF0E50",
+  "Music & dance": "#E04E8C",
+  "Film & TV": "#D6385C",
+  Games: "#E060A0",
 
   // Concepts / contexts
-  Science: "#7E94B0",            // lab steel
-  Society: "#C08148",            // warm sienna
-  "Toxic radiation": "#E94F37",  // warning red
-  "Pollution concerns": "#8B7355",
-  "Nuclear mutant": "#B23AEE",
-  Ultraviolet: "#6A2BC4",        // intense violet
+  Science: "#2A95BA",            // electric lab teal
+  Society: "#CC6F1F",            // vivid sienna
+  "Toxic radiation": "#D94835",  // warning red
+  "Pollution concerns": "#A87830",
+  "Nuclear mutant": "#A82BD9",   // acid violet
+  Ultraviolet: "#6F1ED9",        // intense violet
 
   Misc: "#919191",
 } as const;
