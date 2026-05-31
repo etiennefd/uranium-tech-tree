@@ -543,47 +543,28 @@ export function TechTreeViewer() {
       // Ensure minimum distance from top of viewport
       const ABSOLUTE_MIN_Y = 100;
 
-      // Define fixed vertical bands (pixels from top)
+      // Vertical bands for the uranium tree (pixels from top).
+      // Abstract / scientific at the top → material → effect → hazard →
+      // society → cultural artifact at the bottom.
       const VERTICAL_BANDS: Record<string, number> = {
-        Food: Math.max(100, ABSOLUTE_MIN_Y),
-        Agriculture: Math.max(150, ABSOLUTE_MIN_Y),
-        Biology: Math.max(200, ABSOLUTE_MIN_Y),
-        Medicine: Math.max(250, ABSOLUTE_MIN_Y),
-        Sanitation: 300,
-        Physics: 400,
-        Chemistry: 450,
-        Astronomy: 500,
-        Meteorology: 550,
-        Optics: 600,
-        Electricity: 650,
-        Electronics: 700,
-        Energy: 750,
-        Lighting: 800,
-        Construction: 850,
-        Mining: 900,
-        Metallurgy: 950,
-        Manufacturing: 1000,
-        Textiles: 1050,
-        Hydraulics: 1100,
-        Transportation: 1150,
-        Flying: 1200,
-        Sailing: 1250,
-        Diving: 1300,
-        Space: 1350,
-        Geography: 1400,
-        Mathematics: 1450,
-        Measurement: 1500,
-        Timekeeping: 1550,
-        Computing: 1600,
-        Commerce: 1650,
-        Safety: 1700,
-        Security: 1750,
-        Weaponry: 1800,
-        Communication: 1850,
-        "Visual media": 1900,
-        Recreation: 1950,
-        Music: 2000,
-        Misc: 2050,
+        Science: 100,
+        Ultraviolet: 170,
+        Uranium: 240,
+        Radium: 310,
+        "Green rocks": 380,
+        Glow: 450,
+        "Green glowing uranium": 520,
+        "Green poison": 590,
+        "Toxic radiation": 660,
+        "Pollution concerns": 730,
+        "Nuclear mutant": 800,
+        Society: 870,
+        "Visual arts": 940,
+        "Comics & literature": 1010,
+        "Music & dance": 1080,
+        "Film & TV": 1150,
+        Games: 1220,
+        Misc: 1290,
       };
 
       // Group nodes by year
@@ -602,11 +583,11 @@ export function TechTreeViewer() {
         // Sort nodes by their primary field's band (lowest band = top)
         nodesInYear.sort((a: TechNode, b: TechNode) => {
           const aPos = a.fields?.[0]
-            ? VERTICAL_BANDS[a.fields[0]] || 1200
-            : 1200;
+            ? VERTICAL_BANDS[a.fields[0]] || 1290
+            : 1290;
           const bPos = b.fields?.[0]
-            ? VERTICAL_BANDS[b.fields[0]] || 1200
-            : 1200;
+            ? VERTICAL_BANDS[b.fields[0]] || 1290
+            : 1290;
           return aPos - bPos;
         });
 
@@ -623,7 +604,7 @@ export function TechTreeViewer() {
           } else {
             basePosition = Math.max(
               ABSOLUTE_MIN_Y,
-              (node.fields?.[0] ? VERTICAL_BANDS[node.fields[0]] || 1200 : 1200)
+              (node.fields?.[0] ? VERTICAL_BANDS[node.fields[0]] || 1290 : 1290)
             );
           }
           let y;
