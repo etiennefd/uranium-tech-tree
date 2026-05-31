@@ -9,7 +9,7 @@
     </filter>
   </defs>
   <rect width="64" height="64" fill="#331a4a"/>
-  <path d="M 18 14 L 18 36 A 14 14 0 0 1 46 36 L 46 14"
+  <path d="M 14 12 L 14 36 A 18 18 0 0 0 50 36 L 50 12"
         fill="none" stroke="#4FFF1F" stroke-width="10"
         stroke-linecap="square" stroke-linejoin="miter"
         filter="url(#glow)"/>
