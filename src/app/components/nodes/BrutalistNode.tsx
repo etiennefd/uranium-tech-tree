@@ -259,14 +259,14 @@ const BrutalistNode: React.FC<BrutalistNodeProps> = ({
     >
       <div
         className={`
-        border border-black
-        bg-white
-        ${isSelected ? "ring-2 ring-[#9FFF00]" : ""}
+        border border-[#C5C95C]/30
+        bg-[#1B0E2E]
+        ${isSelected ? "ring-2 ring-[#4FFF1F]" : ""}
         relative
       `}
         style={
           isSelected
-            ? { boxShadow: "0 0 12px 2px rgba(159, 255, 0, 0.65)" }
+            ? { boxShadow: "0 0 12px 2px rgba(79, 255, 31, 0.7)" }
             : undefined
         }
       >
@@ -274,20 +274,19 @@ const BrutalistNode: React.FC<BrutalistNodeProps> = ({
         {isSelected && (
           <button
             onClick={(e) => {
-              e.stopPropagation(); // Prevent triggering node click
-              onClick(); // Use the same onClick handler which will deselect when already selected
+              e.stopPropagation();
+              onClick();
             }}
-            className="absolute -top-2 -right-2 w-5 h-5 bg-white border border-black z-50 flex items-center justify-center hover:bg-gray-100 transition-colors"
+            className="absolute -top-2 -right-2 w-5 h-5 bg-[#1B0E2E] border border-[#4FFF1F] z-50 flex items-center justify-center hover:bg-[#2A1640] transition-colors"
             aria-label="Deselect node"
           >
-            <span className="text-xs font-bold">×</span>
+            <span className="text-xs font-bold text-[#4FFF1F]">×</span>
           </button>
         )}
         {/* Image section with improved loading states */}
         {showImages && (
-          <div className="border-b border-black p-0 relative h-20">
+          <div className="border-b border-[#C5C95C]/30 p-0 relative h-20">
             {specialImage ? (
-              // Special case: render the dedicated image directly
               <Image
                 src={specialImage}
                 alt={node.title}
@@ -296,13 +295,11 @@ const BrutalistNode: React.FC<BrutalistNodeProps> = ({
                 unoptimized
                 className="object-cover"
                 style={{
-                  filter: "grayscale(20%) contrast(110%)",
-                  mixBlendMode: "multiply",
+                  filter: "grayscale(30%) contrast(110%) brightness(0.95)",
                   objectPosition: node.imagePosition || 'center',
                 }}
               />
             ) : (
-              // Original logic for all other nodes
               <>
                 {imageUrl && (
                   <Image
@@ -316,18 +313,15 @@ const BrutalistNode: React.FC<BrutalistNodeProps> = ({
                     onError={handleImageError}
                     onLoad={handleImageLoad}
                     style={{
-                      filter: "grayscale(20%) contrast(110%)",
-                      mixBlendMode: "multiply",
+                      filter: "grayscale(30%) contrast(110%) brightness(0.95)",
                       objectPosition: node.imagePosition || 'center',
                     }}
                     unoptimized={isLocalImage}
                   />
                 )}
-                {/* Show loading state while image is loading */}
                 {!imageLoaded && !imageError && (
-                  <div className="absolute inset-0 bg-gray-100 animate-pulse" />
+                  <div className="absolute inset-0 bg-[#2A1640] animate-pulse" />
                 )}
-                {/* Only show placeholder if we've tried loading and failed */}
                 {imageError && (
                   <Image
                     src="/placeholder-invention.jpg"
@@ -337,8 +331,7 @@ const BrutalistNode: React.FC<BrutalistNodeProps> = ({
                     unoptimized
                     className="object-cover"
                     style={{
-                      filter: "grayscale(20%) contrast(110%)",
-                      mixBlendMode: "multiply",
+                      filter: "grayscale(30%) contrast(110%) brightness(0.95)",
                       objectPosition: node.imagePosition || 'center',
                     }}
                   />
@@ -352,26 +345,27 @@ const BrutalistNode: React.FC<BrutalistNodeProps> = ({
         <div className="px-3 py-2">
           <div className="mb-2">
             <h3
-              className="text-sm font-bold leading-tight"
+              className="text-sm font-bold leading-tight text-[#4FFF1F]"
               style={{
                 wordBreak: "break-word",
                 overflowWrap: "break-word",
                 maxWidth: "100%",
                 fontSize: titleFontSize,
+                textShadow: "0 0 6px rgba(79, 255, 31, 0.45)",
               }}
             >
               {formatTitle(formattedTitle)}
             </h3>
             {node.subtitle && (
-              <div className="text-[10px] font-mono text-gray-600 mt-0.5">
+              <div className="text-[10px] font-mono text-[#C5C95C]/70 mt-0.5">
                 {node.subtitle}
               </div>
             )}
           </div>
 
           {/* Year */}
-          <div className="inline-block border border-black px-2 py-0.5 mb-2">
-            <span className="font-mono text-xs">{yearDisplay}</span>
+          <div className="inline-block border border-[#4FFF1F]/60 px-2 py-0.5 mb-2">
+            <span className="font-mono text-xs text-[#4FFF1F]">{yearDisplay}</span>
           </div>
 
           {/* Fields */}

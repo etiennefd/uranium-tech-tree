@@ -55,7 +55,7 @@ const TechTreeMinimap = ({
   const LABEL_HEIGHT = 10; // Space for labels
   const SMALL_SCREEN_MINIMAP_VERTICAL_SCALE = 2; // How much more vertically compressed the minimap is on small screens
   const daylightUranium = "#C5C95C";
-  const uvGlow = "#9FFF00";
+  const uvGlow = "#4FFF1F";
   const minimapRef = useRef(null);
   const isDragging = useRef(false);
   const [scale, setScale] = useState(1);
@@ -237,7 +237,7 @@ const TechTreeMinimap = ({
                   isSelected || isAdjacent || isAncestor || isDescendant
                     ? uvGlow
                     : daylightUranium,
-                boxShadow: isSelected ? "0 0 4px 1px rgba(159, 255, 0, 0.8)" : undefined,
+                boxShadow: isSelected ? "0 0 4px 1px rgba(79, 255, 31, 0.85)" : undefined,
                 opacity: hasActiveFilters
                   ? isFiltered
                     ? 0.9

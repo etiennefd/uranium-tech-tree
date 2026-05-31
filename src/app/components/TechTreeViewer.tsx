@@ -3427,7 +3427,7 @@ useEffect(() => {
                       return (
                         <div
                           key={`tooltip-${node.id}`}
-                          className="absolute bg-white border border-black rounded-none p-3 shadow-md node-tooltip"
+                          className="absolute bg-[#1B0E2E] border border-[#C5C95C]/40 rounded-none p-3 shadow-md text-[#C5C95C] node-tooltip"
                           data-no-tree-zoom="true"
                           style={{
                             left: `${getXPosition(node.year)}px`,
@@ -3523,7 +3523,7 @@ useEffect(() => {
                                                 e.stopPropagation();
                                                 handleNodeClick(ancestor.title, true);
                                               }}
-                                              className="text-blue-600 hover:text-blue-800 underline cursor-pointer break-words text-left"
+                                              className="text-[#4FFF1F] hover:text-[#9FFF40] underline cursor-pointer break-words text-left"
                                               type="button"
                                             >
                                               {ancestor.title}{suffix}
@@ -3534,7 +3534,7 @@ useEffect(() => {
                                                   href={link.detailsSource}
                                                   target="_blank"
                                                   rel="noopener noreferrer"
-                                                  className="text-gray-500 hover:text-gray-700 cursor-help"
+                                                  className="text-[#C5C95C]/60 hover:text-[#C5C95C] cursor-help"
                                                   title={`${link.details} (click for source)`}
                                                   onClick={(e) => e.stopPropagation()}
                                                 >
@@ -3542,7 +3542,7 @@ useEffect(() => {
                                                 </a>
                                               ) : (
                                                 <span
-                                                  className="text-gray-500 cursor-help"
+                                                  className="text-[#C5C95C]/60 cursor-help"
                                                   title={link.details}
                                                 >
                                                   <Info className="h-3 w-3" />
@@ -3576,7 +3576,7 @@ useEffect(() => {
                                                 e.stopPropagation();
                                                 handleNodeClick(child.title, true);
                                               }}
-                                              className="text-blue-600 hover:text-blue-800 underline cursor-pointer break-words text-left"
+                                              className="text-[#4FFF1F] hover:text-[#9FFF40] underline cursor-pointer break-words text-left"
                                               type="button"
                                             >
                                               {child.title}{suffix}
@@ -3587,7 +3587,7 @@ useEffect(() => {
                                                   href={link.detailsSource}
                                                   target="_blank"
                                                   rel="noopener noreferrer"
-                                                  className="text-gray-500 hover:text-gray-700 cursor-help"
+                                                  className="text-[#C5C95C]/60 hover:text-[#C5C95C] cursor-help"
                                                   title={`${link.details} (click for source)`}
                                                   onClick={(e) => e.stopPropagation()}
                                                 >
@@ -3595,7 +3595,7 @@ useEffect(() => {
                                                 </a>
                                               ) : (
                                                 <span
-                                                  className="text-gray-500 cursor-help"
+                                                  className="text-[#C5C95C]/60 cursor-help"
                                                   title={link.details}
                                                 >
                                                   <Info className="h-3 w-3" />
@@ -3628,7 +3628,7 @@ useEffect(() => {
                                                 e.stopPropagation();
                                                 handleNodeClick(replacedNode.title, true);
                                               }}
-                                              className="text-blue-600 hover:text-blue-800 underline cursor-pointer break-words text-left"
+                                              className="text-[#4FFF1F] hover:text-[#9FFF40] underline cursor-pointer break-words text-left"
                                               type="button"
                                             >
                                               {replacedNode.title}
@@ -3639,7 +3639,7 @@ useEffect(() => {
                                                   href={link.detailsSource}
                                                   target="_blank"
                                                   rel="noopener noreferrer"
-                                                  className="text-gray-500 hover:text-gray-700 cursor-help"
+                                                  className="text-[#C5C95C]/60 hover:text-[#C5C95C] cursor-help"
                                                   title={`${link.details} (click for source)`}
                                                   onClick={(e) => e.stopPropagation()}
                                                 >
@@ -3647,7 +3647,7 @@ useEffect(() => {
                                                 </a>
                                               ) : (
                                                 <span
-                                                  className="text-gray-500 cursor-help"
+                                                  className="text-[#C5C95C]/60 cursor-help"
                                                   title={link.details}
                                                 >
                                                   <Info className="h-3 w-3" />
@@ -3680,7 +3680,7 @@ useEffect(() => {
                                                 e.stopPropagation();
                                                 handleNodeClick(connectedNode.title, true);
                                               }}
-                                              className="text-blue-600 hover:text-blue-800 underline cursor-pointer break-words text-left"
+                                              className="text-[#4FFF1F] hover:text-[#9FFF40] underline cursor-pointer break-words text-left"
                                               type="button"
                                             >
                                               {connectedNode.title}
@@ -3691,7 +3691,7 @@ useEffect(() => {
                                                   href={link.detailsSource}
                                                   target="_blank"
                                                   rel="noopener noreferrer"
-                                                  className="text-gray-500 hover:text-gray-700 cursor-help"
+                                                  className="text-[#C5C95C]/60 hover:text-[#C5C95C] cursor-help"
                                                   title={`${link.details} (click for source)`}
                                                   onClick={(e) => e.stopPropagation()}
                                                 >
@@ -3699,7 +3699,7 @@ useEffect(() => {
                                                 </a>
                                               ) : (
                                                 <span
-                                                  className="text-gray-500 cursor-help"
+                                                  className="text-[#C5C95C]/60 cursor-help"
                                                   title={link.details}
                                                 >
                                                   <Info className="h-3 w-3" />
@@ -3732,7 +3732,7 @@ useEffect(() => {
                                                 e.stopPropagation();
                                                 handleNodeClick(connectedNode.title, true);
                                               }}
-                                              className="text-blue-600 hover:text-blue-800 underline cursor-pointer break-words text-left"
+                                              className="text-[#4FFF1F] hover:text-[#9FFF40] underline cursor-pointer break-words text-left"
                                               type="button"
                                             >
                                               {connectedNode.title}
@@ -3743,7 +3743,7 @@ useEffect(() => {
                                                   href={link.detailsSource}
                                                   target="_blank"
                                                   rel="noopener noreferrer"
-                                                  className="text-gray-500 hover:text-gray-700 cursor-help"
+                                                  className="text-[#C5C95C]/60 hover:text-[#C5C95C] cursor-help"
                                                   title={`${link.details} (click for source)`}
                                                   onClick={(e) => e.stopPropagation()}
                                                 >
@@ -3751,7 +3751,7 @@ useEffect(() => {
                                                 </a>
                                               ) : (
                                                 <span
-                                                  className="text-gray-500 cursor-help"
+                                                  className="text-[#C5C95C]/60 cursor-help"
                                                   title={link.details}
                                                 >
                                                   <Info className="h-3 w-3" />
@@ -3784,7 +3784,7 @@ useEffect(() => {
                                                 e.stopPropagation();
                                                 handleNodeClick(replacedByNode.title, true);
                                               }}
-                                              className="text-blue-600 hover:text-blue-800 underline cursor-pointer break-words text-left"
+                                              className="text-[#4FFF1F] hover:text-[#9FFF40] underline cursor-pointer break-words text-left"
                                               type="button"
                                             >
                                               {replacedByNode.title}
@@ -3795,7 +3795,7 @@ useEffect(() => {
                                                   href={link.detailsSource}
                                                   target="_blank"
                                                   rel="noopener noreferrer"
-                                                  className="text-gray-500 hover:text-gray-700 cursor-help"
+                                                  className="text-[#C5C95C]/60 hover:text-[#C5C95C] cursor-help"
                                                   title={`${link.details} (click for source)`}
                                                   onClick={(e) => e.stopPropagation()}
                                                 >
@@ -3803,7 +3803,7 @@ useEffect(() => {
                                                 </a>
                                               ) : (
                                                 <span
-                                                  className="text-gray-500 cursor-help"
+                                                  className="text-[#C5C95C]/60 cursor-help"
                                                   title={link.details}
                                                 >
                                                   <Info className="h-3 w-3" />
@@ -3834,7 +3834,7 @@ useEffect(() => {
                                       target="_blank"
                                       rel="noopener noreferrer"
                                       onClick={(e) => e.stopPropagation()}
-                                      className="text-blue-600 hover:underline cursor-pointer"
+                                      className="text-[#4FFF1F] hover:text-[#9FFF40] hover:underline cursor-pointer"
                                     >
                                       Wikipedia
                                     </a>
@@ -3853,7 +3853,7 @@ useEffect(() => {
                                       target="_blank"
                                       rel="noopener noreferrer"
                                       onClick={(e) => e.stopPropagation()}
-                                      className="text-blue-600 hover:underline cursor-pointer"
+                                      className="text-[#4FFF1F] hover:text-[#9FFF40] hover:underline cursor-pointer"
                                     >
                                       Wikipedia
                                     </a>

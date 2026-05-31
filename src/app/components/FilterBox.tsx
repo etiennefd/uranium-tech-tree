@@ -251,7 +251,7 @@ export const FilterBox: React.FC<FilterBoxProps> = ({
                 key={`${suggestion.type}-${suggestion.value}`}
                 className={`p-2 cursor-pointer ${
                   index === selectedIndex
-                    ? "bg-[#9FFF00]/20"
+                    ? "bg-[#4FFF1F]/20"
                     : "hover:bg-[#C5C95C]/15"
                 }`}
                 onClick={() => addFilter(suggestion.type, suggestion.value)}
