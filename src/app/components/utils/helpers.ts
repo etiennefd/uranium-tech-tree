@@ -14,6 +14,18 @@ export const cleanLocationForTooltip = (location: string | undefined): string | 
 };
 
 /**
+ * Returns only the country portion of a location for the tooltip, dropping any
+ * city/state prefix (e.g. "Arco, Idaho, USA" -> "USA", "Paris, France" -> "France").
+ * Locations without a comma (e.g. "UK", "France; USA") are returned as-is.
+ */
+export const cleanCountryForTooltip = (location: string | undefined): string | undefined => {
+  const cleaned = cleanLocationForTooltip(location);
+  if (!cleaned) return undefined;
+  const parts = cleaned.split(',');
+  return parts[parts.length - 1].trim();
+};
+
+/**
  * Validates image URLs and returns undefined for invalid ones
  */
 export const validateImageUrl = (imageUrl: string | null | undefined): string | undefined => {

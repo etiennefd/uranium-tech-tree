@@ -39,6 +39,7 @@ import {
 import {
   escapeRegExp,
   cleanLocationForTooltip,
+  cleanCountryForTooltip,
   validateImageUrl,
   fetchWithRetry,
   throttle
@@ -3435,7 +3436,7 @@ useEffect(() => {
                           }}
                         >
                           <p className="text-xs mb-1">
-                            <strong>Date:</strong> {formatYear(node.year)}
+                            <strong>When:</strong> {formatYear(node.year)}
                             {node.dateDetails && ` – ${node.dateDetails}`}
                           </p>
                           {node.inventors &&
@@ -3443,16 +3444,7 @@ useEffect(() => {
                             node.inventors.filter((inv: string) => inv !== "unknown")
                               .length > 0 && (
                               <p className="text-xs mb-1">
-                                <strong>
-                                  {node.type === "Discovery"
-                                    ? `Discoverer${
-                                        node.inventors.length > 1 ? "s" : ""
-                                      }`
-                                    : `Inventor${
-                                        node.inventors.length > 1 ? "s" : ""
-                                      }`}
-                                  :
-                                </strong>{" "}
+                                <strong>Who:</strong>{" "}
                                 {node.inventors.includes("unknown")
                                   ? "possibly " +
                                     node.inventors
@@ -3461,21 +3453,9 @@ useEffect(() => {
                                   : node.inventors.join(", ")}
                               </p>
                             )}
-                          {node.organizations &&
-                            node.organizations.length > 0 && (
-                              <p className="text-xs mb-1">
-                                <strong>
-                                  {node.organizations.length > 1
-                                    ? "Organizations"
-                                    : "Organization"}
-                                  :
-                                </strong>{" "}
-                                {node.organizations.join(", ")}
-                              </p>
-                            )}
                           {node.formattedLocation && (
                             <p className="text-xs mb-1">
-                              <strong>Location:</strong> {cleanLocationForTooltip(node.formattedLocation)}
+                              <strong>Where:</strong> {cleanCountryForTooltip(node.formattedLocation)}
                             </p>
                           )}
                           {node.details && (
@@ -3803,49 +3783,6 @@ useEffect(() => {
                                   </div>
                                 )}
                               </>
-                            );
-                          })()}
-
-                          {(() => {
-                            const nodeId = selectedNodeId || hoveredNode?.id;
-                            if (!nodeId) return null;
-
-                            if (isMobile) {
-                              return node.wikipedia && (
-                                <div className="text-xs mt-2">
-                                  <div>
-                                    View on{" "}
-                                    <a
-                                      href={node.wikipedia}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      onClick={(e) => e.stopPropagation()}
-                                      className="text-[#4FFF1F] hover:text-[#9FFF40] hover:underline cursor-pointer"
-                                    >
-                                      Wikipedia
-                                    </a>
-                                  </div>
-                                </div>
-                              );
-                            }
-
-                            return (
-                              <div className="text-xs mt-2">
-                                {node.wikipedia && (
-                                  <div>
-                                    View on{" "}
-                                    <a
-                                      href={node.wikipedia}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      onClick={(e) => e.stopPropagation()}
-                                      className="text-[#4FFF1F] hover:text-[#9FFF40] hover:underline cursor-pointer"
-                                    >
-                                      Wikipedia
-                                    </a>
-                                  </div>
-                                )}
-                              </div>
                             );
                           })()}
                         </div>
