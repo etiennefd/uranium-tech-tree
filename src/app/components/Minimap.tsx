@@ -62,7 +62,7 @@ const TechTreeMinimap = ({
 
   // Key years to display (this data set starts in 1772, so earlier ticks
   // would all collapse onto the leftmost node)
-  const originalKeyYears = [1800, 1850, 1900, 1950, 2000];
+  const originalKeyYears = [1800, 1850, 1900, 1925, 1950, 1975, 2000];
 
   const keyYears = originalKeyYears;
 
