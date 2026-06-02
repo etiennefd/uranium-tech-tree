@@ -52,14 +52,14 @@ const IntroBox = memo(() => {
         URANIUM TECH TREE
       </h1>
       <p className="text-sm mb-3" style={{ color: darkerBlue }}>
-        A companion piece to{" "}
+        A companion piece to the blog post{" "}
         <a
           href="https://www.hopefulmons.com/p/reality-is-joking-about-u"
           target="_blank"
           rel="noopener noreferrer"
           style={linkStyle}
         >
-          the blog post
+          Reality Is Joking About U
         </a>{" "}
         by Étienne Fortier-Dubois.
       </p>
