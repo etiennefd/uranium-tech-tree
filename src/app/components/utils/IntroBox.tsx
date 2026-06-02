@@ -65,11 +65,10 @@ const IntroBox = memo(() => {
       </p>
 
       <p className="text-sm" style={{ color: darkerBlue }}>
-        Two and a half centuries of science, industry, art, and anxiety
-        surrounding a single element — currently{" "}
-        <span style={numberStyle}>{counts.nodes}</span> entries linked by{" "}
-        <span style={numberStyle}>{counts.links}</span> connections. Hover or
-        click any node to learn more.
+        A timeline of discoveries, events, and cultural depictions surrounding
+        uranium. Fluorescence, radioactivity, fission, and unrealistic green
+        glows. Contains <span style={numberStyle}>{counts.nodes}</span> nodes and{" "}
+        <span style={numberStyle}>{counts.links}</span> connections.
       </p>
     </div>
   );
