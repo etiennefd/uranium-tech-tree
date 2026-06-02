@@ -549,6 +549,13 @@ export function TechTreeViewer() {
       // Ensure minimum distance from top of viewport
       const ABSOLUTE_MIN_Y = 100;
 
+      // The IntroBox sits in the top-left corner. Any node whose column falls
+      // under it (x below INTRO_BOX_RIGHT_EDGE) is pushed down to at least
+      // INTRO_BOX_BOTTOM_CLEARANCE so the two don't overlap. With this data set
+      // that only affects the earliest node (Description of pitchblende, 1772).
+      const INTRO_BOX_RIGHT_EDGE = 440;
+      const INTRO_BOX_BOTTOM_CLEARANCE = 390;
+
       // Vertical bands for the uranium tree (pixels from top).
       // Abstract / scientific at the top → material → effect → hazard →
       // society → cultural artifact at the bottom.
@@ -612,6 +619,10 @@ export function TechTreeViewer() {
               ABSOLUTE_MIN_Y,
               (node.fields?.[0] ? VERTICAL_BANDS[node.fields[0]] || 1290 : 1290)
             );
+            // Keep top-left nodes from colliding with the IntroBox
+            if (x < INTRO_BOX_RIGHT_EDGE) {
+              basePosition = Math.max(basePosition, INTRO_BOX_BOTTOM_CLEARANCE);
+            }
           }
           let y;
           if (currentY === null) {
