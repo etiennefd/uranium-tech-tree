@@ -221,7 +221,7 @@ const ConnectionTooltip: React.FC<ConnectionTooltipProps> = ({
       case "thematic":
         return (
           <>
-            {Source} thematically influenced {Target}
+            {Source} may have thematically influenced {Target}
           </>
         );
       default:
