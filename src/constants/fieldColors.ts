@@ -24,9 +24,12 @@ export const FIELD_COLORS: Record<string, string> = {
   Science: "#2A95BA",            // electric lab teal
   Society: "#CC6F1F",            // vivid sienna
   "Toxic radiation": "#D94835",  // warning red
+  War: "#C81E2D",                // deep alarm crimson
   "Pollution concerns": "#A87830",
   "Nuclear mutant": "#A82BD9",   // acid violet
   Ultraviolet: "#6F1ED9",        // intense violet
+  Medicine: "#7FE0C0",           // pale clinical mint — radium cures and quackery
+  Mining: "#8C7B5A",             // ore / stone gray-brown
 
   Misc: "#919191",
 } as const;
