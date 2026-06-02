@@ -60,19 +60,11 @@ const TechTreeMinimap = ({
   const isDragging = useRef(false);
   const [scale, setScale] = useState(1);
 
-  // Key years to display (original list)
-  const originalKeyYears = [
-    -100000, -10000, -1000, 0, 500, 1000, 1500,
-    1750, 1800, 1850, 1900, 1950, 2000,
-  ];
+  // Key years to display (this data set starts in 1772, so earlier ticks
+  // would all collapse onto the leftmost node)
+  const originalKeyYears = [1800, 1850, 1900, 1950, 2000];
 
-  // Filter key years based on screen size
-  const keyYears = useMemo(() => {
-    if (isSmallScreen) {
-      return originalKeyYears.filter(year => year !== 1000);
-    }
-    return originalKeyYears;
-  }, [isSmallScreen]);
+  const keyYears = originalKeyYears;
 
   // Calculate scaling factors for the minimap layout
   useEffect(() => {
