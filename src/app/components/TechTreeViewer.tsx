@@ -53,7 +53,12 @@ import { Info } from 'lucide-react';
 import { usePinchZoom } from "../hooks/usePinchZoom";
 
 // Timeline scale boundaries
-const YEAR_INDUSTRIAL = 1750;
+// NOTE: This data set runs 1772–2019, so every tier below 1500 is inert.
+// The uranium story is sparse before the late 1890s and dense after, so we
+// switch to 1-year-per-column at 1895 (the run-up to radioactivity packs in
+// several important nodes). Years 1772–1894 fall into the 1500–1750 tier
+// below and get 5-year bins.
+const YEAR_INDUSTRIAL = 1895;
 const YEAR_EARLY_MODERN = 1500;
 const YEAR_ANTIQUITY_AND_MEDIEVAL = -400;
 const YEAR_IRON_AGE = -1000;
