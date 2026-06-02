@@ -218,6 +218,13 @@ type CustomAirtableRecord = AirtableRecord<FieldSet>;
         .map((record) => {
           const fromValue = record.get("From");
           const toValue = record.get("To");
+          // "Type" is a multiple-select in Airtable; take the first option
+          // (e.g. "strict" / "thematic"), falling back to "default".
+          const typeValue = record.get("Type");
+          const type =
+            Array.isArray(typeValue) && typeValue.length > 0
+              ? String(typeValue[0])
+              : "default";
           return {
             source:
               Array.isArray(fromValue) && fromValue.length > 0
@@ -227,7 +234,7 @@ type CustomAirtableRecord = AirtableRecord<FieldSet>;
               Array.isArray(toValue) && toValue.length > 0
                 ? toValue[0]
                 : String(toValue ?? ""),
-            type: "default",
+            type,
             details: "",
             detailsSource: "",
             dateAdded: String(record.get("Date added") || ""),

@@ -22,6 +22,8 @@ interface NodePosition {
 }
 
 export type ConnectionType =
+  | "strict"
+  | "thematic"
   | "Prerequisite"
   | "Improvement"
   | "Speculative"
@@ -225,10 +227,11 @@ const CurvedConnections: React.FC<CurvedConnectionsProps> = ({
           ...baseStyle,
           strokeDasharray: "4,4", // Medium dashes for unclear links
         };
+      case "thematic":
       case "Speculative":
         return {
           ...baseStyle,
-          strokeDasharray: "2,4", // Short dashes, longer gaps for speculative connections
+          strokeDasharray: "2,4", // Short dashes, longer gaps for thematic connections
         };
       case "Obsolescence":
         return {

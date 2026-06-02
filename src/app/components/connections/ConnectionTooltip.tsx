@@ -218,6 +218,12 @@ const ConnectionTooltip: React.FC<ConnectionTooltipProps> = ({
             {Source} may have led to {Target} (to be confirmed)
           </>
         );
+      case "thematic":
+        return (
+          <>
+            {Source} thematically influenced {Target}
+          </>
+        );
       default:
         return (
           <>
