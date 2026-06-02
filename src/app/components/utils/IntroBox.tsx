@@ -65,8 +65,17 @@ const IntroBox = memo(() => {
       </p>
 
       <p className="text-sm" style={{ color: darkerBlue }}>
-        A timeline of discoveries, events, and cultural depictions surrounding
-        uranium. Fluorescence, radioactivity, fission, and unrealistic green
+        This is a customized version of the{" "}
+        <a
+          href="https://www.historicaltechtree.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={linkStyle}
+        >
+          Historical Tech Tree
+        </a>
+        , showing discoveries, events, and cultural depictions surrounding
+        uranium: fluorescence, radioactivity, fission, and unrealistic green
         glows. Contains <span style={numberStyle}>{counts.nodes}</span> nodes and{" "}
         <span style={numberStyle}>{counts.links}</span> connections.
       </p>
