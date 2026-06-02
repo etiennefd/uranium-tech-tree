@@ -235,8 +235,8 @@ type CustomAirtableRecord = AirtableRecord<FieldSet>;
                 ? toValue[0]
                 : String(toValue ?? ""),
             type,
-            details: "",
-            detailsSource: "",
+            details: String(record.get("Details") || ""),
+            detailsSource: String(record.get("Details source") || ""),
             dateAdded: String(record.get("Date added") || ""),
           };
         });
