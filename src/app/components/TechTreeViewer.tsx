@@ -3124,7 +3124,7 @@ useEffect(() => {
               {isClient && (
                 <div 
                   ref={searchBoxContainerRef}
-                  className="bg-transparent md:bg-[#1B0E2E] md:border md:border-[#C5C95C]/30 md:rounded-none md:shadow-md md:p-4 relative z-30"
+                  className="bg-transparent md:bg-[#1B0E2E] md:border md:border-[#C5C95C] md:rounded-none md:shadow-md md:p-4 relative z-30"
                   style={{ overscrollBehavior: 'contain' }} // Removed overflow: 'hidden'
                 >
                   <DynamicSearchBox
@@ -3139,7 +3139,7 @@ useEffect(() => {
               {isClient && (
                 <div 
                   ref={filterBoxContainerRef}
-                  className="bg-transparent md:bg-[#1B0E2E] md:border md:border-[#C5C95C]/30 md:rounded-none md:shadow-md md:p-4 relative z-20"
+                  className="bg-transparent md:bg-[#1B0E2E] md:border md:border-[#C5C95C] md:rounded-none md:shadow-md md:p-4 relative z-20"
                   style={{ overscrollBehavior: 'contain' }} // Removed overflow: 'hidden'
                 >
                   <DynamicFilterBox
@@ -3894,7 +3894,7 @@ useEffect(() => {
       {/* Desktop zoom controls */}
       {!isTouchDevice && !isLoading && (
         <div className="fixed bottom-20 right-16 z-30 -translate-y-1 font-mono">
-          <div className="flex items-center overflow-hidden border border-[#C5C95C]/30 bg-[#1B0E2E]">
+          <div className="flex items-center overflow-hidden border border-[#C5C95C] bg-[#1B0E2E]">
             <button
               type="button"
               className="px-2 py-1 text-xs text-[#C5C95C] transition-colors hover:bg-[#C5C95C]/10 disabled:cursor-not-allowed disabled:opacity-40"
@@ -3949,7 +3949,7 @@ useEffect(() => {
         {showSettingsMenu && (
           <div 
             ref={settingsMenuRef}
-            className="absolute bottom-full right-0 mb-2 bg-[#1B0E2E] border border-[#C5C95C]/30 p-4 min-w-[200px] font-mono"
+            className="absolute bottom-full right-0 mb-2 bg-[#1B0E2E] border border-[#C5C95C] p-4 min-w-[200px] font-mono"
           >
             <div className="space-y-6">
               {/* Connections Mode */}

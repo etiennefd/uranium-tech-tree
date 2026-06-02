@@ -259,7 +259,7 @@ const BrutalistNode: React.FC<BrutalistNodeProps> = ({
     >
       <div
         className={`
-        border border-[#C5C95C]/30
+        border border-[#C5C95C]
         bg-[#1B0E2E]
         ${isSelected ? "ring-2 ring-[#4FFF1F]" : ""}
         relative
