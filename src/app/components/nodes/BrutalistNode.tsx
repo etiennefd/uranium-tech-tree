@@ -25,28 +25,6 @@ interface BrutalistNodeProps {
   showImages?: boolean;
 }
 
-const formatTitle = (title: string) => {
-  // Special cases
-  const specialCases: { [key: string]: string } = {
-    'mRNA': 'mRNA',
-    'p–n': 'p–n',
-    'Technetium-99m': 'TECHNETIUM-99m',
-    'pH': 'pH',
-    'YInMn': 'YInMn',
-    // Add more special cases as needed
-  };
-
-  // Check if the entire title is a special case
-  if (specialCases[title]) {
-    return specialCases[title];
-  }
-
-  // Check for special cases within the title
-  return title.split(' ').map(word => {
-    return specialCases[word] || word.toUpperCase();
-  }).join(' ');
-};
-
 // Helper function to validate image URLs
 const validateImage = (url?: string): string | undefined => {
   if (!url) return undefined;
@@ -354,7 +332,7 @@ const BrutalistNode: React.FC<BrutalistNodeProps> = ({
                 textShadow: "0 0 6px rgba(79, 255, 31, 0.45)",
               }}
             >
-              {formatTitle(formattedTitle)}
+              {formattedTitle}
             </h3>
             {node.subtitle && (
               <div className="text-[10px] font-mono text-[#C5C95C]/70 mt-0.5">
