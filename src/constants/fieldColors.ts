@@ -10,7 +10,7 @@ export const FIELD_COLORS: Record<string, string> = {
   // Greens — four shades, dim mineral → vivid radioactive
   "Green rocks": "#3F7A1F",
   "Green poison": "#6FA32E",
-  "Green glowing uranium": "#4FCF1A",
+  "Green glow uranium": "#4FCF1A",
   Glow: "#1FBA8A",
 
   // Cultural artifacts — saturated pink family

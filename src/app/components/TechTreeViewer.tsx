@@ -559,7 +559,7 @@ export function TechTreeViewer() {
         Radium: 310,
         "Green rocks": 380,
         Glow: 450,
-        "Green glowing uranium": 520,
+        "Green glow uranium": 520,
         "Green poison": 590,
         "Toxic radiation": 660,
         "Pollution concerns": 730,
