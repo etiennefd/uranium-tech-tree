@@ -351,7 +351,6 @@ export function TechTreeViewer() {
     fields: new Set(),
     subfields: new Set(),
     countries: new Set(),
-    cities: new Set(),
   });
   const [highlightedAncestors, setHighlightedAncestors] = useState<Set<string>>(new Set());
   const [highlightedDescendants, setHighlightedDescendants] = useState<Set<string>>(new Set());
@@ -1643,17 +1642,9 @@ export function TechTreeViewer() {
         }
       }
 
-      // Apply city filters
-      if (filters.cities.size > 0) {
-        const nodeCities = node.city ? node.city.split(",").map((c) => c.trim()) : [];
-        if (!nodeCities.some((city: string) => filters.cities.has(city))) {
-          return false;
-        }
-      }
-
       return true;
     },
-    [filters.fields, filters.subfields, filters.countries, filters.cities]
+    [filters.fields, filters.subfields, filters.countries]
   );
 
   const isLinkVisible = useCallback(
@@ -1686,18 +1677,6 @@ export function TechTreeViewer() {
           ])
         )
       ).sort(),
-      cities: Array.from(
-        new Set(
-          data.nodes.flatMap((n) =>
-            n.city
-              ? n.city
-                  .split(",")
-                  .map((c) => c.trim())
-                  .filter(Boolean)
-              : []
-          )
-        )
-      ).sort(),
     }),
     [data.nodes]
   );
@@ -1707,8 +1686,7 @@ export function TechTreeViewer() {
     const hasActiveFilters =
       filters.fields.size > 0 ||
       filters.subfields.size > 0 ||
-      filters.countries.size > 0 ||
-      filters.cities.size > 0;
+      filters.countries.size > 0;
 
     if (!hasActiveFilters) {
       return new Set<string>();
@@ -1780,7 +1758,7 @@ export function TechTreeViewer() {
   // Add this effect to prefetch nodes when filters are applied
   useEffect(() => {
     // Skip if no filters are applied
-    const hasActiveFilters = filters.fields.size > 0 || filters.subfields.size > 0 || filters.countries.size > 0 || filters.cities.size > 0;
+    const hasActiveFilters = filters.fields.size > 0 || filters.subfields.size > 0 || filters.countries.size > 0;
     if (!hasActiveFilters) return;
         
     // Find nodes that match the current filters
@@ -1799,12 +1777,7 @@ export function TechTreeViewer() {
         (node.countryModern && filters.countries.has(node.countryModern)) ||
         (node.countryHistorical && filters.countries.has(node.countryHistorical));
       
-      // Check if node matches city filters
-      const matchesCity = filters.cities.size === 0 || 
-        (node.city && filters.cities.has(node.city)) ||
-        (node.formattedLocation && filters.cities.has(cleanLocationForTooltip(node.formattedLocation) || ''));
-      
-      return matchesFields && matchesSubfields && matchesCountries && matchesCity;
+      return matchesFields && matchesSubfields && matchesCountries;
     });
 
     // Limit the number of nodes to prefetch to avoid overwhelming the API
@@ -2443,7 +2416,7 @@ export function TechTreeViewer() {
         return isNodeConnectedToSelectedLink(node.id) ? 1 : 0.2;
       }
       // If filters are applied
-      if (filters.fields.size || filters.subfields.size || filters.countries.size || filters.cities.size) {
+      if (filters.fields.size || filters.subfields.size || filters.countries.size) {
         return isNodeFiltered(node) ? 1 : 0.2;
       }
       // Default state - fully visible
@@ -2477,7 +2450,7 @@ export function TechTreeViewer() {
         return getLinkKey(link) === selectedLinkKey ? 1 : 0.2;
       }
       // If filters are applied
-      if (filters.fields.size || filters.subfields.size || filters.countries.size || filters.cities.size) {
+      if (filters.fields.size || filters.subfields.size || filters.countries.size) {
         return isLinkVisible(link) ? 1 : 0.2;
       }
       return 1;
@@ -3208,7 +3181,7 @@ useEffect(() => {
           }}
         >
           <div
-            className="h-12 bg-[#331a4a] border-b timeline flex-shrink-0"
+            className="h-12 bg-[#331a4a] border-b border-[#C5C95C] timeline flex-shrink-0"
             data-no-tree-zoom="true"
             style={{
               width: `calc(${containerWidth}px * var(--tree-zoom))`,

@@ -10,7 +10,6 @@ interface FilterBoxProps {
     fields: string[];
     subfields: string[];
     countries: string[];
-    cities: string[];
   };
 }
 
@@ -52,7 +51,6 @@ export const FilterBox: React.FC<FilterBoxProps> = ({
     addMatches("fields", availableFilters.fields);
     addMatches("subfields", availableFilters.subfields);
     addMatches("countries", availableFilters.countries);
-    addMatches("cities", availableFilters.cities);
 
     return suggestions;
   };
@@ -159,8 +157,6 @@ export const FilterBox: React.FC<FilterBoxProps> = ({
         return "Subfield";
       case "countries":
         return "Country";
-      case "cities":
-        return "City";
       default:
         return "Filter";
     }
