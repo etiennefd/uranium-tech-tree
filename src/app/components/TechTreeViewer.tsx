@@ -1289,11 +1289,14 @@ export function TechTreeViewer() {
         ...concurrentDevelopment.map(item => item.node.id)
       ]);
 
-      // Get regular connections, excluding any that are in special categories
+      // Get regular connections, excluding any that are in special categories.
+      // "Built upon" / "Led to" cover strict (non-thematic) links; thematic
+      // links get their own predecessor/successor sections below.
       const ancestors = data.links
-        .filter((link) => 
-          link.target === nodeId && 
+        .filter((link) =>
+          link.target === nodeId &&
           !specialNodeIds.has(link.source) &&
+          link.type !== "thematic" &&
           !["Obsolescence", "Independently invented", "Concurrent development"].includes(link.type)
         )
         .map((link) => ({
@@ -1305,9 +1308,10 @@ export function TechTreeViewer() {
         .sort((a, b) => b.node.year - a.node.year);
 
       const children = data.links
-        .filter((link) => 
-          link.source === nodeId && 
+        .filter((link) =>
+          link.source === nodeId &&
           !specialNodeIds.has(link.target) &&
+          link.type !== "thematic" &&
           !["Obsolescence", "Independently invented", "Concurrent development"].includes(link.type)
         )
         .map((link) => ({
@@ -1318,10 +1322,30 @@ export function TechTreeViewer() {
         // Sort children by year (earliest first)
         .sort((a, b) => a.node.year - b.node.year);
 
-      return { 
-        ancestors, 
-        children, 
-        replaced, 
+      const thematicAncestors = data.links
+        .filter((link) => link.target === nodeId && link.type === "thematic")
+        .map((link) => ({
+          node: data.nodes.find((n) => n.id === link.source),
+          link
+        }))
+        .filter((item): item is { node: TechNode; link: TechTreeLink } => item.node !== undefined)
+        .sort((a, b) => b.node.year - a.node.year);
+
+      const thematicChildren = data.links
+        .filter((link) => link.source === nodeId && link.type === "thematic")
+        .map((link) => ({
+          node: data.nodes.find((n) => n.id === link.target),
+          link
+        }))
+        .filter((item): item is { node: TechNode; link: TechTreeLink } => item.node !== undefined)
+        .sort((a, b) => a.node.year - b.node.year);
+
+      return {
+        ancestors,
+        children,
+        thematicAncestors,
+        thematicChildren,
+        replaced,
         replacedBy,
         independentlyInvented,
         concurrentDevelopment
@@ -3457,7 +3481,7 @@ useEffect(() => {
 
                           {/* Updated connections section */}
                           {(() => {
-                            const { ancestors, children, replaced, replacedBy, independentlyInvented, concurrentDevelopment } = getNodeConnections(
+                            const { ancestors, children, thematicAncestors, thematicChildren, replaced, replacedBy, independentlyInvented, concurrentDevelopment } = getNodeConnections(
                               node.id
                             );
                             return (
@@ -3539,6 +3563,110 @@ useEffect(() => {
                                               type="button"
                                             >
                                               {child.title}{suffix}
+                                            </button>
+                                            {link.details && (
+                                              link.detailsSource ? (
+                                                <a
+                                                  href={link.detailsSource}
+                                                  target="_blank"
+                                                  rel="noopener noreferrer"
+                                                  className="text-[#C5C95C]/60 hover:text-[#C5C95C] cursor-help"
+                                                  title={`${link.details} (click for source)`}
+                                                  onClick={(e) => e.stopPropagation()}
+                                                >
+                                                  <Info className="h-3 w-3" />
+                                                </a>
+                                              ) : (
+                                                <span
+                                                  className="text-[#C5C95C]/60 cursor-help"
+                                                  title={link.details}
+                                                >
+                                                  <Info className="h-3 w-3" />
+                                                </span>
+                                              )
+                                            )}
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                  </div>
+                                )}
+
+                                {thematicAncestors.length > 0 && (
+                                  <div className="text-xs mb-1">
+                                    <strong>Thematic predecessors:</strong>
+                                    <div className="ml-2">
+                                      {thematicAncestors.map((item, index: number) => {
+                                        const ancestor = item.node;
+                                        const link = item.link;
+
+                                        return (
+                                          <div
+                                            key={`thematic-ancestor-${node.id}-${ancestor.id}-${index}`}
+                                            className="grid grid-cols-[auto_1fr_auto] items-start gap-1"
+                                          >
+                                            <span className="flex-shrink-0">•</span>
+                                            <button
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleNodeClick(ancestor.title, true);
+                                              }}
+                                              className="text-[#4FFF1F] hover:text-[#9FFF40] underline cursor-pointer break-words text-left"
+                                              type="button"
+                                            >
+                                              {ancestor.title}
+                                            </button>
+                                            {link.details && (
+                                              link.detailsSource ? (
+                                                <a
+                                                  href={link.detailsSource}
+                                                  target="_blank"
+                                                  rel="noopener noreferrer"
+                                                  className="text-[#C5C95C]/60 hover:text-[#C5C95C] cursor-help"
+                                                  title={`${link.details} (click for source)`}
+                                                  onClick={(e) => e.stopPropagation()}
+                                                >
+                                                  <Info className="h-3 w-3" />
+                                                </a>
+                                              ) : (
+                                                <span
+                                                  className="text-[#C5C95C]/60 cursor-help"
+                                                  title={link.details}
+                                                >
+                                                  <Info className="h-3 w-3" />
+                                                </span>
+                                              )
+                                            )}
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                  </div>
+                                )}
+
+                                {thematicChildren.length > 0 && (
+                                  <div className="text-xs mb-1">
+                                    <strong>Thematic successors:</strong>
+                                    <div className="ml-2">
+                                      {thematicChildren.map((item, index: number) => {
+                                        const child = item.node;
+                                        const link = item.link;
+
+                                        return (
+                                          <div
+                                            key={`thematic-child-${node.id}-${child.id}-${index}`}
+                                            className="grid grid-cols-[auto_1fr_auto] items-start gap-1"
+                                          >
+                                            <span className="flex-shrink-0">•</span>
+                                            <button
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleNodeClick(child.title, true);
+                                              }}
+                                              className="text-[#4FFF1F] hover:text-[#9FFF40] underline cursor-pointer break-words text-left"
+                                              type="button"
+                                            >
+                                              {child.title}
                                             </button>
                                             {link.details && (
                                               link.detailsSource ? (
