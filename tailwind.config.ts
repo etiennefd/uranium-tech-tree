@@ -9,6 +9,17 @@ export default {
   ],
   theme: {
   	extend: {
+  		fontFamily: {
+  			mono: [
+  				'var(--font-app-mono)',
+  				'ui-monospace',
+  				'SFMono-Regular',
+  				'Menlo',
+  				'Monaco',
+  				'Consolas',
+  				'monospace',
+  			],
+  		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

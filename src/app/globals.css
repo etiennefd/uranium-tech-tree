@@ -2,10 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Default interface font; overridable live via ?font= (see FontSwitcher) */
+  --font-app-mono: var(--font-space-mono);
+}
+
 html,
 body {
   background-color: #331a4a;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-app-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, monospace;
 }
 
 /* Custom scrollbar styles */

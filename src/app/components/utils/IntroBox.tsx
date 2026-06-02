@@ -5,9 +5,9 @@ const IntroBox = memo(() => {
   const [counts, setCounts] = useState({ nodes: 0, links: 0 });
   const darkerBlue = "#C5C95C";
   const linkStyle = { color: darkerBlue, textDecoration: "underline" };
-  const numberStyle = { 
-    color: darkerBlue, 
-    fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" 
+  const numberStyle = {
+    color: darkerBlue,
+    fontFamily: "var(--font-app-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
   };
 
   // Get counts from cache and data
@@ -52,24 +52,24 @@ const IntroBox = memo(() => {
         URANIUM TECH TREE
       </h1>
       <p className="text-sm mb-3" style={{ color: darkerBlue }}>
-        A companion piece to a blog post by{" "}
+        A companion piece to{" "}
         <a
-          href="https://www.hopefulmons.com/"
+          href="https://www.hopefulmons.com/p/reality-is-joking-about-u"
           target="_blank"
           rel="noopener noreferrer"
           style={linkStyle}
         >
-          Étienne Fortier-Dubois
-        </a>
-        .
+          the blog post
+        </a>{" "}
+        by Étienne Fortier-Dubois.
       </p>
 
       <p className="text-sm" style={{ color: darkerBlue }}>
-        Two and a half centuries of discoveries and inventions surrounding a single
-        element, currently spanning{" "}
-        <span style={numberStyle}>{counts.nodes}</span> technologies linked by{" "}
-        <span style={numberStyle}>{counts.links}</span> connections. Hover or click
-        any node to learn more.
+        Two and a half centuries of science, industry, art, and anxiety
+        surrounding a single element — currently{" "}
+        <span style={numberStyle}>{counts.nodes}</span> entries linked by{" "}
+        <span style={numberStyle}>{counts.links}</span> connections. Hover or
+        click any node to learn more.
       </p>
     </div>
   );

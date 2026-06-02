@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Space_Mono, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Analytics } from '@vercel/analytics/next';
+import FontSwitcher from "./components/FontSwitcher";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -12,6 +14,18 @@ const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
+});
+const spaceMono = Space_Mono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-space-mono",
+  display: "swap",
+});
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-plex-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -54,14 +68,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} ${spaceMono.variable} ${plexMono.variable}`}
+    >
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <meta name="format-detection" content="telephone=no" />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className="antialiased">
+        <FontSwitcher />
         {children}
         <Analytics />
       </body>
