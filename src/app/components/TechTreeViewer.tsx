@@ -3124,7 +3124,7 @@ useEffect(() => {
               {isClient && (
                 <div 
                   ref={searchBoxContainerRef}
-                  className="bg-transparent md:bg-white/80 md:backdrop-blur md:border md:border-black md:rounded-none md:shadow-md md:p-4 relative z-30"
+                  className="bg-transparent md:bg-[#1B0E2E] md:border md:border-[#C5C95C]/30 md:rounded-none md:shadow-md md:p-4 relative z-30"
                   style={{ overscrollBehavior: 'contain' }} // Removed overflow: 'hidden'
                 >
                   <DynamicSearchBox
@@ -3139,7 +3139,7 @@ useEffect(() => {
               {isClient && (
                 <div 
                   ref={filterBoxContainerRef}
-                  className="bg-transparent md:bg-white/80 md:backdrop-blur md:border md:border-black md:rounded-none md:shadow-md md:p-4 relative z-20"
+                  className="bg-transparent md:bg-[#1B0E2E] md:border md:border-[#C5C95C]/30 md:rounded-none md:shadow-md md:p-4 relative z-20"
                   style={{ overscrollBehavior: 'contain' }} // Removed overflow: 'hidden'
                 >
                   <DynamicFilterBox
@@ -3894,7 +3894,7 @@ useEffect(() => {
       {/* Desktop zoom controls */}
       {!isTouchDevice && !isLoading && (
         <div className="fixed bottom-20 right-16 z-30 -translate-y-1 font-mono">
-          <div className="flex items-center overflow-hidden border border-[#C5C95C] bg-white/80 backdrop-blur">
+          <div className="flex items-center overflow-hidden border border-[#C5C95C]/30 bg-[#1B0E2E]">
             <button
               type="button"
               className="px-2 py-1 text-xs text-[#C5C95C] transition-colors hover:bg-[#C5C95C]/10 disabled:cursor-not-allowed disabled:opacity-40"
@@ -3949,7 +3949,7 @@ useEffect(() => {
         {showSettingsMenu && (
           <div 
             ref={settingsMenuRef}
-            className="absolute bottom-full right-0 mb-2 bg-white/80 backdrop-blur border border-[#C5C95C] p-4 min-w-[200px] font-mono"
+            className="absolute bottom-full right-0 mb-2 bg-[#1B0E2E] border border-[#C5C95C]/30 p-4 min-w-[200px] font-mono"
           >
             <div className="space-y-6">
               {/* Connections Mode */}
@@ -3959,7 +3959,7 @@ useEffect(() => {
                   {!isTouchDevice && (
                     <div>
                       <div className="flex items-center justify-between gap-4">
-                        <span className="text-sm">Zoom</span>
+                        <span className="text-sm text-white">Zoom</span>
                         <div className="flex items-center border border-[#C5C95C]">
                           <button
                             type="button"
@@ -3993,7 +3993,7 @@ useEffect(() => {
                   )}
 
                   <div className="flex items-center justify-between">
-                  <span className="text-sm">Connections</span>
+                  <span className="text-sm text-white">Connections</span>
                   <div className="flex border border-[#C5C95C] ml-4">
                     <button
                       className={`px-2 py-1 text-xs transition-colors ${
@@ -4033,7 +4033,7 @@ useEffect(() => {
               {/* Images Toggle */}
               <div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">Images</span>
+                  <span className="text-sm text-white">Images</span>
                   <div className="flex items-center space-x-3 ml-4">
                     <span className="text-xs text-[#C5C95C]">Hide</span>
                     <button
