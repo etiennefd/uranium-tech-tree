@@ -557,7 +557,7 @@ export function TechTreeViewer() {
       // INTRO_BOX_BOTTOM_CLEARANCE so the two don't overlap. (Nodes render with
       // a -75px transform, and the box is tall, so this floor is well below the
       // box's nominal bottom.) With this data set that only affects the earliest
-      // node (Description of pitchblende, 1772).
+      // node (Pitchblende ore, 1772).
       const INTRO_BOX_RIGHT_EDGE = 440;
       const INTRO_BOX_BOTTOM_CLEARANCE = 500;
 
