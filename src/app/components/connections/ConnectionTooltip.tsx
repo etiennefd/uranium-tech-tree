@@ -163,7 +163,7 @@ const ConnectionTooltip: React.FC<ConnectionTooltipProps> = ({
       <button
         onClick={(e) => handleNodeClick(e, sourceTitle)}
         onMouseEnter={() => handleNodeHover(sourceTitle)}
-        className="text-[#4FFF1F] hover:text-[#9FFF40] underline cursor-pointer"
+        className="text-[#4FFF1F] hover:text-[#9FFF40] underline cursor-pointer text-left"
         type="button"
       >
         {sourceTitle}
@@ -174,7 +174,7 @@ const ConnectionTooltip: React.FC<ConnectionTooltipProps> = ({
       <button
         onClick={(e) => handleNodeClick(e, targetTitle)}
         onMouseEnter={() => handleNodeHover(targetTitle)}
-        className="text-[#4FFF1F] hover:text-[#9FFF40] underline cursor-pointer"
+        className="text-[#4FFF1F] hover:text-[#9FFF40] underline cursor-pointer text-left"
         type="button"
       >
         {targetTitle}
