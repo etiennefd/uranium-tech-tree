@@ -124,7 +124,7 @@ const ConnectionTooltip: React.FC<ConnectionTooltipProps> = ({
 
   return (
     <div
-      className="fixed bg-white border border-black rounded-none p-3 shadow-md w-56 z-50"
+      className="fixed bg-[#1B0E2E] border border-[#C5C95C]/40 rounded-none p-3 shadow-md w-56 z-50 text-[#C5C95C]"
       style={{
         left: position.left,
         top: position.top,
@@ -142,16 +142,16 @@ const ConnectionTooltip: React.FC<ConnectionTooltipProps> = ({
             e.preventDefault();
             onClose();
           }}
-          className="absolute -top-2 -right-2 w-5 h-5 bg-white border border-black z-50 flex items-center justify-center hover:bg-gray-100 transition-colors"
+          className="absolute -top-2 -right-2 w-5 h-5 bg-[#1B0E2E] border border-[#4FFF1F] z-50 flex items-center justify-center hover:bg-[#2A1640] transition-colors"
           aria-label="Deselect connection"
           type="button"
         >
-          <span className="text-xs font-bold">×</span>
+          <span className="text-xs font-bold text-[#4FFF1F]">×</span>
         </button>
       )}
       <p className="text-xs mb-1.5">{renderConnectionContent()}</p>
       {details && (
-        <p className="text-xs text-gray-600 border-t border-black pt-1.5 mt-1.5">
+        <p className="text-xs text-[#C5C95C]/70 border-t border-[#C5C95C]/40 pt-1.5 mt-1.5">
           {details}
         </p>
       )}
@@ -163,7 +163,7 @@ const ConnectionTooltip: React.FC<ConnectionTooltipProps> = ({
       <button
         onClick={(e) => handleNodeClick(e, sourceTitle)}
         onMouseEnter={() => handleNodeHover(sourceTitle)}
-        className="text-blue-600 hover:text-blue-800 underline cursor-pointer"
+        className="text-[#4FFF1F] hover:text-[#9FFF40] underline cursor-pointer"
         type="button"
       >
         {sourceTitle}
@@ -174,7 +174,7 @@ const ConnectionTooltip: React.FC<ConnectionTooltipProps> = ({
       <button
         onClick={(e) => handleNodeClick(e, targetTitle)}
         onMouseEnter={() => handleNodeHover(targetTitle)}
-        className="text-blue-600 hover:text-blue-800 underline cursor-pointer"
+        className="text-[#4FFF1F] hover:text-[#9FFF40] underline cursor-pointer"
         type="button"
       >
         {targetTitle}
